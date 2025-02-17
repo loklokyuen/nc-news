@@ -5,7 +5,29 @@
   --color-tea-green-500: #C9F2C7;
   --color-asparagus-500: #629460;
   --color-dark-green-500: #243119;
-  --color-ash-green-500: #A8C7BB;
+  --color-green-kelp-50: #f4f7ee;
+  --color-green-kelp-100: #e6edda;
+  --color-green-kelp-200: #cfdeb8;
+  --color-green-kelp-300: #b0c88e;
+  --color-green-kelp-400: #92b16a;
+  --color-green-kelp-500: #75964c;
+  --color-green-kelp-600: #5a763a;
+  --color-green-kelp-700: #475b30;
+  --color-green-kelp-800: #3a4a2a;
+  --color-green-kelp-900: #344027;
+  --color-green-kelp-950: #243119;
+  --color-shadow-green-50: #f2f7f5;
+  --color-shadow-green-100: #dfece5;
+  --color-shadow-green-200: #c1d9ce;
+  --color-shadow-green-300: #a8c7bb;
+  --color-shadow-green-400: #6b9c8a;
+  --color-shadow-green-500: #4b7e6d;
+  --color-shadow-green-600: #386356;
+  --color-shadow-green-700: #2c5046;
+  --color-shadow-green-800: #254038;
+  --color-shadow-green-900: #1f352f;
+  --color-shadow-green-950: #111d1a;
+  
   --color-fairy-tale-500: #EEC8E0;
 }
 #root {
@@ -13,6 +35,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #243119;
 }
 
 .article-item {
