@@ -9,14 +9,14 @@ export default function ArticleList(){
 
     useEffect(()=>{
         getArticles()
-        .then((data)=>{
-            setArticles(data.articles)
-            setTotalNumberOfArticles(data.total_count)
+        .then(({ articles, total_count})=>{
+            setArticles(articles)
+            setTotalNumberOfArticles(total_count)
         })
     }, []);
 
     return <>
-        <h1>All Articles ({totalNumberOfArticles})</h1>
+        <h2>All Articles ({totalNumberOfArticles})</h2>
         <ul>
         { articles.map((article)=>{
             return <ArticleItem key={article.article_id} article={article}></ArticleItem>
