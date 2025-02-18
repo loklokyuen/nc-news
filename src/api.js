@@ -24,3 +24,10 @@ export const getCommentsByArticleId = (article_id)=>{
         return data
     })
 }
+
+export const getUserInfoByUsername = (username)=>{
+    return newsAPI.get(`/users/${username}`)
+    .then(({ data })=>{
+        return data
+    })
+}
