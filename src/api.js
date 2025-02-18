@@ -50,6 +50,15 @@ export const postArticleComment = (article_id, username, body)=>{
     })
 }
 
+export const patchCommentVote = (comment_id, voteChange)=>{
+    return newsAPI.patch(`/comments/${comment_id}`, {
+        inc_votes: voteChange
+    })
+    .then(({ data })=>{
+        return data
+    })
+}
+
 export const deleteCommentById = (comment_id)=>{
     return newsAPI.delete(`/comments/${comment_id}`)
     .then(({ data })=>{
