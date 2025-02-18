@@ -79,7 +79,7 @@ export default function Article(){
         <h3 className="font-bold text-xl m-2">{article.title}</h3>
         <p>{article.author}</p>
         <NavLink to={`/topics/${article.topic}`}>
-            <h4 className="font-semibold text-highland-600 hover:text-highland-400">Topic: {article.topic}</h4>
+            <h4 className="font-semibold text-highland-600 hover:text-highland-400">Topic: {article.topic[0].toUpperCase() + article.topic.substring(1)}</h4>
         </NavLink>
         <p>Posted on {article.created_at}</p>
         <p className="p-5 text-left">{article.body}</p>
@@ -91,7 +91,7 @@ export default function Article(){
             {currDownvote === 1 ? 
             <i className="fa-solid fa-thumbs-down fa-xl m-1 text-mandys-pink-700" onClick={handleDownvote}></i>:
             <i className="fa-regular fa-thumbs-down fa-xl m-1 text-mandys-pink-700" onClick={handleDownvote}></i>}
-            <span className={`text-xl font-extrabold ${article.votes > 0 ? "text-highland-500":"text-mandys-pink-700"}`}>{article.votes + currUpvote - currDownvote}</span>
+            <span className={`text-xl font-extrabold ${article.votes >= 0 ? "text-highland-500":"text-mandys-pink-700"}`}>{article.votes + currUpvote - currDownvote}</span>
             { isError && <><br /><span className="text-roman-700">Something went wrong! Unable to vote, please try again later.</span></>}
         </p>
         <section ref={commentRef} className="comment-section border-2 p-2 border-shadow-green-400 rounded-sm m-1.5">
