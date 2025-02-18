@@ -4,9 +4,13 @@ const newsAPI = axios.create({
     baseURL: "https://news-and-discussion-platform.onrender.com/api",
 })
 
-export const getArticles = ()=>{
-    return newsAPI.get("/articles")
-    .then(({ data })=>{
+export const getArticles = (topic)=>{
+    return newsAPI.get("/articles", {
+        params: {
+            topic
+        }
+    })
+    .then(({ data })=>{        
         return data
     })
 }
@@ -53,6 +57,13 @@ export const deleteCommentById = (comment_id)=>{
 
 export const getUserInfoByUsername = (username)=>{
     return newsAPI.get(`/users/${username}`)
+    .then(({ data })=>{
+        return data
+    })
+}
+
+export const getTopics = ()=>{
+    return newsAPI.get("/topics")
     .then(({ data })=>{
         return data
     })

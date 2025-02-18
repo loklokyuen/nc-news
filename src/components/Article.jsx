@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router";
+import { NavLink, useParams } from "react-router";
 import { getArticleById, getCommentsByArticleId, patchArticleVote } from "../api";
 import Comment from "./Comment";
 import NewComment from "./NewComment";
@@ -78,7 +78,9 @@ export default function Article(){
         <img src={article.article_img_url} alt="article image" className="p-4 w-80vw"/>
         <h3 className="font-bold text-xl m-2">{article.title}</h3>
         <p>{article.author}</p>
-        <h4 className="font-semibold text-green-kelp-700">Topic: {article.topic}</h4>
+        <NavLink to={`/topics/${article.topic}`}>
+            <h4 className="font-semibold text-highland-600 hover:text-highland-400">Topic: {article.topic}</h4>
+        </NavLink>
         <p>Posted on {article.created_at}</p>
         <p className="p-5 text-left">{article.body}</p>
 
