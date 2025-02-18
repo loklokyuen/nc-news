@@ -2,10 +2,7 @@
 
 @theme {
   --spacing: 6px;
-  --color-olivine-500: rgb(150, 190, 140);
-  --color-tea-green-500: #C9F2C7;
   --color-asparagus-500: #629460;
-  --color-dark-green-500: #243119;
   --color-green-kelp-50: #f4f7ee;
   --color-green-kelp-100: #e6edda;
   --color-green-kelp-200: #cfdeb8;
@@ -40,6 +37,30 @@
   --color-highland-900: #1e3620;
   --color-highland-950: #101e12;
   --color-fairy-tale-500: #EEC8E0;
+  --color-roman-50: #fef3f2;
+  --color-roman-100: #fee4e2;
+  --color-roman-200: #fdcfcb;
+  --color-roman-300: #fbaca6;
+  --color-roman-400: #f67c73;
+  --color-roman-500: #ee6055;
+  --color-roman-600: #d93629;
+  --color-roman-700: #b7291e;
+  --color-roman-800: #97261d;
+  --color-roman-900: #7e251e;
+  --color-roman-950: #440f0b;
+  --color-mandys-pink-50: #fef5f2;
+  --color-mandys-pink-100: #ffe8e1;
+  --color-mandys-pink-200: #ffc9b9;
+  --color-mandys-pink-300: #feb8a3;
+  --color-mandys-pink-400: #fb8e6e;
+  --color-mandys-pink-500: #f26941;
+  --color-mandys-pink-600: #e04d22;
+  --color-mandys-pink-700: #bc3e19;
+  --color-mandys-pink-800: #9b3719;
+  --color-mandys-pink-900: #81321b;
+  --color-mandys-pink-950: #461709;
+  
+  
 }
 
 #root {
