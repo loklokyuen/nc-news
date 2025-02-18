@@ -19,12 +19,14 @@ export default function NewComment({ articleId, onCommentPosted}) {
             setLoading(false)
             setComment('')
             setMessage('Comment posted!')
+            setTimeout(()=>setMessage(''), 3000)
             onCommentPosted({author: loggedInUser, body: comment, created_at: new Date().toISOString(), votes: 0})
         })
         .catch((err)=>{
             setLoading(false)
             setIsError(true)
             setMessage('Something went wrong! Unable to comment, please try again later.')
+            setTimeout(()=>setMessage(''), 3000)
         })
 
     }

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { getArticleById, getCommentsByArticleId, patchArticleVote } from "../api";
 import Comment from "./Comment";
 import NewComment from "./NewComment";
+import Loader from "./Loader";
 
 export default function Article(){
     const [article, setArticle] = useState({})
@@ -11,6 +12,8 @@ export default function Article(){
     const [currDownvote, setCurrDownvote] = useState(0)
     const [isError, setIsError] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [message, setMessage] = useState('')
+    const commentRef = useRef(null)
 
     const params = useParams();
     const articleId = params.article_id;
@@ -55,11 +58,20 @@ export default function Article(){
 
     function handleCommentPosted(comment){
         setComments(prevComments => [comment, ...prevComments])
+        commentRef.current.scrollIntoView({ behavior: 'smooth' });
+        setMessage('Comment posted!')
+        setTimeout(()=>setMessage(''), 3000)
+
     }
 
-    if (loading) return <div className="flex flex-col self-center items-center justify-center h-screen">
-        <div className="loader"></div>
-    </div>;
+    function handleCommentDeleted(commentId){
+        setComments(prevComments => prevComments.filter((comment)=> comment.comment_id !== commentId))
+        commentRef.current.scrollIntoView({ behavior: 'smooth' });
+        setMessage('Comment deleted!')
+        setTimeout(()=>setMessage(''), 3000)
+    }
+
+    if (loading) return <Loader/>;
 
     return <section className="w-80vw bg-shadow-green-300 text-green-kelp-800 mt-2">
         <h2 className="font-extrabold text-2xl pt-4 text-shadow-green-600">Article</h2>
@@ -80,10 +92,11 @@ export default function Article(){
             <span className={`text-xl font-extrabold ${article.votes > 0 ? "text-highland-500":"text-mandys-pink-700"}`}>{article.votes + currUpvote - currDownvote}</span>
             { isError && <><br /><span className="text-roman-700">Something went wrong! Unable to vote, please try again later.</span></>}
         </p>
-        <section className="comment-section border-2 p-2 border-shadow-green-400 rounded-sm m-1.5">
+        <section ref={commentRef} className="comment-section border-2 p-2 border-shadow-green-400 rounded-sm m-1.5">
             <h4 className="font-bold text-green-kelp-600 text-xl p-2 bg-shadow-green-100 m-1">Comments</h4>
+            { message && <div className={`w-full m-1 ${ isError? "text-roman-700" : "border-shadow-green-500"}`}>{message}</div>}
             { comments.map((comment)=>{
-                return <Comment key={comment.comment_id} comment={comment}></Comment>
+                return <Comment key={comment.comment_id} comment={comment} onCommentDeleted={handleCommentDeleted}></Comment>
             })}
             <NewComment articleId={articleId} onCommentPosted={handleCommentPosted}></NewComment>
         </section>
