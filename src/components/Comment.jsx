@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { UserAccount } from "../contexts/UserAccount";
 import { deleteCommentById } from "../api";
 import SmallLoader from "./SmallLoader";
+import Voting from "./Voting";
 
 export default function Comment({ comment, onCommentDeleted }) {
     const formattedDate = new Date(comment.created_at).toLocaleString();
@@ -43,9 +44,7 @@ export default function Comment({ comment, onCommentDeleted }) {
                 <i className="fa-regular fa-circle-xmark text-mandys-pink-700 fa-lg" onClick={deleteComment}></i></span>}
             </div>
             <p className="text-right">Posted on {formattedDate}</p>
-            <p className="text-left">
-                <i className="fa-regular fa-thumbs-up"></i> <i className="fa-regular fa-thumbs-down"></i> {comment.votes}
-            </p>
+            <Voting votes={comment.votes} itemType="comment" id={comment.comment_id}></Voting>
             { message && <div className={`bg-shadow-green-200/90 w-full m-1 ${ isError? "text-roman-600" : "border-shadow-green-500"}`}>{message}</div>}
         </div>
         
