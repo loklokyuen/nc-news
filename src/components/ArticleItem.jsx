@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import Voting from "./Voting";
 
 export default function ArticleItem({ article }){
     const formattedDate = new Date(article.created_at).toLocaleString();
@@ -12,7 +13,7 @@ export default function ArticleItem({ article }){
             <p className="font-semibold text-highland-500 hover:text-highland-400">Topic: {article.topic[0].toUpperCase() + article.topic.slice(1)}</p>
         </NavLink>
         <p>Posted on {formattedDate}</p>
-        <p><i className="fa-regular fa-thumbs-up"></i> <i className="fa-regular fa-thumbs-down"></i> {article.votes}</p>
+        <Voting votes={article.votes} itemType="article" id={article.article_id}></Voting>
         <p>Comment ({article.comment_count})</p>
     </li>
 }
