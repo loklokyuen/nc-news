@@ -34,6 +34,16 @@ export const patchArticleVote = (article_id, voteChange)=>{
     })
 }
 
+export const postArticleComment = (article_id, username, body)=>{
+    return newsAPI.post(`/articles/${article_id}/comments`, {
+        username,
+        body
+    })
+    .then(({ data })=>{
+        return data
+    })
+}
+
 export const getUserInfoByUsername = (username)=>{
     return newsAPI.get(`/users/${username}`)
     .then(({ data })=>{
