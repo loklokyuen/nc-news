@@ -21,20 +21,20 @@ export default function Article(){
             setComments(comments)
         })
     }, [])
-    return <section className="w-80vw bg-shadow-green-200 text-green-kelp-900 p-5">
-        <h2 className="font-extrabold text-2xl p-5">Article</h2>
-        <img src={article.article_img_url} alt="article image" className="p-2 w-80vw"/>
-        <h3 className="font-bold text-xl">{article.title}</h3>
+    return <section className="w-80vw bg-shadow-green-300 text-green-kelp-800 mt-2">
+        <h2 className="font-extrabold text-2xl pt-4 text-shadow-green-600">Article</h2>
+        <img src={article.article_img_url} alt="article image" className="p-4 w-80vw"/>
+        <h3 className="font-bold text-xl m-2">{article.title}</h3>
         <p>{article.author}</p>
         <h4 className="font-semibold text-green-kelp-700">Topic: {article.topic}</h4>
-        <p>Created At: {article.created_at}</p>
-        <p className="p-5">{article.body}</p>
+        <p>Posted on {article.created_at}</p>
+        <p className="p-5 text-left">{article.body}</p>
 
         <p>
             <i className="fa-regular fa-thumbs-up"></i> <i className="fa-regular fa-thumbs-down"></i> {article.votes}
         </p>
-        <section className="comment-section border-2 p-2 border-shadow-green-400 rounded-sm">
-            <h4 className="font-bold text-green-kelp-600 text-xl p-2 bg-shadow-green-100">Comments</h4>
+        <section className="comment-section border-2 p-2 border-shadow-green-400 rounded-sm m-1.5 ">
+            <h4 className="font-bold text-green-kelp-600 text-xl p-2 bg-shadow-green-100 m-1">Comments</h4>
             { comments.map((comment)=>{
                 return <Comment key={comment.comment_id} comment={comment}></Comment>
             })}

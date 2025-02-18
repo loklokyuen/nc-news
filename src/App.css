@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --spacing: 6px;
   --color-olivine-500: rgb(150, 190, 140);
   --color-tea-green-500: #C9F2C7;
   --color-asparagus-500: #629460;
@@ -27,37 +28,70 @@
   --color-shadow-green-800: #254038;
   --color-shadow-green-900: #1f352f;
   --color-shadow-green-950: #111d1a;
-  
+  --color-highland-50: #f2f7f2;
+  --color-highland-100: #e2ecdf;
+  --color-highland-200: #c4dac0;
+  --color-highland-300: #99bf96;
+  --color-highland-400: #629460;
+  --color-highland-500: #498049;
+  --color-highland-600: #356636;
+  --color-highland-700: #2b512c;
+  --color-highland-800: #244125;
+  --color-highland-900: #1e3620;
+  --color-highland-950: #101e12;
   --color-fairy-tale-500: #EEC8E0;
 }
+
 #root {
-  max-width: 1280px;
+  width: 100vw;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: #243119;
+  background-color: var(--color-shadow-green-200);
+}
+
+.banner {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: url("https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg");
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .article-item {
   padding: 2em;
-  /* width: 350px; */
   border: solid;
   border-radius: 10px;
   padding: 10px;
   margin: 20px 0;
-  /* background-color: rgb(150, 190, 140); */
 }
 
 li{
   list-style-type: none;
 }
 
-.article-item-img{
-  width: 300px;
+button {
+  color: var(--color-shadow-green-100);
+  font-weight: 700;
+  background-color: var(--color-shadow-green-500);
 }
-.article-img{
-  width: 80vw;
+
+button:hover {
+  border: var(--color-shadow-green-500);
 }
-p {
-  padding: 5px;
+
+.loader {
+  border: 16px solid #f3f3f3; 
+  border-top: 16px solid var(--color-shadow-green-500);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
