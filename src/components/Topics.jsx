@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Topic from "./Topic";
 import { getTopics } from "../api";
 
-export default function Topics() {
+export default function Topics({ setCurrentPage }) {
+    setCurrentPage('topics')
     const [topics, setTopics] = useState([])
 
     useEffect(()=>{
@@ -11,10 +12,9 @@ export default function Topics() {
             setTopics(topics)
         })
     }, [])
-    return <section>
+    return <section className="items-center justify-center flex flex-col ">
             <h2 className="font-extrabold text-2xl pt-4 text-shadow-green-600">Browse by Topic</h2>
-
-            <ul>
+            <ul className="w-full max-w-3xl">
                 {topics.map((topic)=>{
                     return <Topic key={topic.slug} topic={topic}></Topic>
                 })}

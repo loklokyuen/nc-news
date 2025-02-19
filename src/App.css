@@ -62,12 +62,16 @@
 }
 
 #root {
-  width: 100vw;
+  min-width: 100vw;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   background-color: var(--color-shadow-green-200);
 }
+
 
 .banner {
   background-repeat: no-repeat;

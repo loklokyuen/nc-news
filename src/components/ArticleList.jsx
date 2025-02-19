@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { getArticles } from "../api";
 import ArticleItem from "./ArticleItem";
-import { useNavigate, useParams, useSearchParams } from "react-router";
+import { NavLink, useNavigate, useParams, useSearchParams } from "react-router";
 import SortFilterBar from "./SortFilterBar";
 import Loader from "./Loader";
 
-export default function ArticleList(){
+export default function ArticleList({ setCurrentPage }){
+    setCurrentPage('articles')
     const [articles, setArticles] = useState([])
     const [totalNumberOfArticles, setTotalNumberOfArticles] = useState([])
     const [loading, setLoading] = useState(true)
@@ -39,7 +40,13 @@ export default function ArticleList(){
     if (isError) return <div className="not-found">{message}</div>
 
     return <div>
-        <h2 className="font-bold text-2xl pt-4 text-shadow-green-600">{topic? topic[0].toUpperCase() + topic.slice(1): "All Articles"} ({totalNumberOfArticles})</h2>
+
+        <h2 className="font-bold text-2xl pt-4 text-shadow-green-600">
+            {topic? topic[0].toUpperCase() + topic.slice(1): "All Articles"} ({totalNumberOfArticles})
+            <NavLink to="/articles/add">
+            <i className="absolute float-right m-1 p-0 text-center justify-center text-shadow-green-500 bg-shadow-green-50 rounded-2xl hover:text-shadow-green-50 hover:bg-shadow-green-500 hover:border-shadow-green-500 hover:border fa-solid fa-circle-plus fa-md"></i>
+        </NavLink>
+        </h2>
         <SortFilterBar topic={topic} sort_by={sort_by} order={order} setSearchParams={setSearchParams}></SortFilterBar>
         <ul className="items-center flex flex-col flex-wrap justify-center md:flex-row md:grid-cols-3 md:items-stretch md:gap-x-4">
         { articles.map((article)=>{

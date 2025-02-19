@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { patchArticleVote } from "../api";
+import { patchArticleVote, patchCommentVote } from "../api";
 
 export default function Voting({ votes, itemType, id }) {
     const [currUpvote, setCurrUpvote] = useState(0)
@@ -37,6 +37,13 @@ export default function Voting({ votes, itemType, id }) {
         setCurrUpvote(0)
         if (itemType === "article") {
             patchArticleVote(id, vote)
+            .catch((err)=>{   
+                setIsError(true)
+                setCurrDownvote(prevDownvote => prevDownvote === 1 ? 0 : 1)
+                setTimeout(()=>setIsError(false), 3000)
+            })
+        } else {
+            patchCommentVote(id, vote)
             .catch((err)=>{   
                 setIsError(true)
                 setCurrDownvote(prevDownvote => prevDownvote === 1 ? 0 : 1)
