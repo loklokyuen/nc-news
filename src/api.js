@@ -4,12 +4,14 @@ const newsAPI = axios.create({
     baseURL: "https://news-and-discussion-platform.onrender.com/api",
 })
 
-export const getArticles = (sort_by, order, topic)=>{
+export const getArticles = (sort_by, order, topic, page, limit)=>{
     return newsAPI.get("/articles", {
         params: {
             sort_by,
             order,
-            topic
+            topic,
+            p: page, 
+            limit
         }
     })
     .then(({ data })=>{        

@@ -4,9 +4,9 @@ import { UserAccount } from "../contexts/UserAccount";
 
 export default function NavBar({ currentPage }) {
     const { loggedInUser, avatarURL } = useContext(UserAccount);
-    return <>
+    return <div className="bg-shadow-green-100/50">
           <NavLink to="/">
-            <span className="h-10 text-xl rounded-xs text-shadow-green-600">Northcoders News</span>
+            <span className="h-10 text-2xl rounded-xs text-shadow-green-600 font-stretch-80% font-semibold">Northcoders News</span>
           </NavLink>
           <br />
         <nav className="nav-bar flex flex-row items-center justify-center divide-x-3 divide-asparagus-500">
@@ -25,5 +25,5 @@ export default function NavBar({ currentPage }) {
             </div>
           </NavLink>
         </nav>
-    </>
+    </div>
 }
