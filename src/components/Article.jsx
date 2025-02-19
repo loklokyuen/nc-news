@@ -7,7 +7,7 @@ import Loader from "./Loader";
 import Voting from "./Voting";
 
 export default function Article(){
-    const [article, setArticle] = useState({})
+    const [article, setArticle] = useState(null)
     const [comments, setComments] = useState([])
     const [isError, setIsError] = useState(false)
     const [loading, setLoading] = useState(true)
@@ -18,6 +18,8 @@ export default function Article(){
     const articleId = params.article_id;
     useEffect(()=>{
         setLoading(true)
+        setIsError(false)
+        setMessage('')
         getArticleById(articleId)
         .then(({ article })=>{
             const formattedDate = new Date(article.created_at).toLocaleString();
@@ -29,8 +31,13 @@ export default function Article(){
             setComments(comments)
             setLoading(false)
         })
+        .catch((err)=>{
+            setLoading(false)
+            setIsError(true)
+            const errorMessage = err.response?.data?.msg || 'Something went wrong! Unable to fetch article, please try again later.'
+            setMessage(errorMessage)
+        })
     }, [articleId])
-
 
     function handleCommentPosted(comment){
         setComments(prevComments => [comment, ...prevComments])
@@ -48,13 +55,14 @@ export default function Article(){
     }
 
     if (loading) return <Loader/>;
+    if (isError && !article) return <div className="not-found">{message}</div>
 
     return <section className="w-80vw bg-shadow-green-300 text-green-kelp-800 mt-2">
         <h2 className="font-extrabold text-2xl pt-4 text-shadow-green-600">Article</h2>
         <img src={article.article_img_url} alt="article image" className="p-4 w-80vw"/>
         <h3 className="font-bold text-xl m-2">{article.title}</h3>
         <p>{article.author}</p>
-        <NavLink to={`/topics/${article.topic}`}>
+        <NavLink to={`/articles?topic=${article.topic}`}>
             <h4 className="font-semibold text-highland-600 hover:text-highland-400">Topic: {article.topic[0].toUpperCase() + article.topic.substring(1)}</h4>
         </NavLink>
         <p>Posted on {article.created_at}</p>
@@ -63,7 +71,7 @@ export default function Article(){
         <Voting votes={article.votes} itemType="article" id={articleId}></Voting>
         <section ref={commentRef} className="comment-section border-2 p-2 border-shadow-green-400 rounded-sm m-1.5">
             <h4 className="font-bold text-green-kelp-600 text-xl p-2 bg-shadow-green-100 m-1">Comments</h4>
-            { message && <div className={`w-full m-1 ${ isError? "text-roman-700" : "border-shadow-green-500"}`}>{message}</div>}
+            { message && <div className={`message ${ isError? "text-mandys-pink-500" : "text-shadow-green-500"}`}>{message}</div>}
             { comments.map((comment)=>{
                 return <Comment key={comment.comment_id} comment={comment} onCommentDeleted={handleCommentDeleted}></Comment>
             })}

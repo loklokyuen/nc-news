@@ -9,7 +9,7 @@ export default function ArticleItem({ article }){
             <h4 className="text-highland-600 hover:text-highland-400 p-1 pt-0 text-lg font-bold">{article.title}</h4>
         </NavLink>
         <p>{article.author}</p>
-        <NavLink to={`/topics/${article.topic}`}>
+        <NavLink to={`/articles?topic=${article.topic}`}>
             <p className="font-semibold text-highland-500 hover:text-highland-400">Topic: {article.topic[0].toUpperCase() + article.topic.slice(1)}</p>
         </NavLink>
         <p>Posted on {formattedDate}</p>

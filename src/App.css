@@ -103,6 +103,13 @@ button:hover {
   border: 2px solid var(--color-shadow-green-400);
 }
 
+button:disabled {
+  background-color: var(--color-gray-400);
+  color: var(--color-gray-200);
+  border: none;
+  cursor: not-allowed;
+}
+
 .loader {
   border: 16px solid #f3f3f3; 
   border-top: 16px solid var(--color-shadow-green-500);
@@ -124,4 +131,12 @@ button:hover {
   width: 60px;
   height: 60px;
   animation: spin 2s linear infinite;
+}
+
+.not-found {
+ @apply text-mandys-pink-500 m-2 font-semibold bg-mandys-pink-50/50 p-4
+}
+
+.message {
+  @apply w-full mt-1 p-1 font-semibold bg-mandys-pink-50/50
 }

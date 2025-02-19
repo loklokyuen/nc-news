@@ -11,8 +11,6 @@ import NavBar from './components/NavBar'
 import NewArticle from './components/NewArticle'
 
 function App() {
-
-
   return (
     <>
       <UserAccountProvider>
@@ -23,13 +21,10 @@ function App() {
           <Route path="/articles/add" element={<NewArticle />}></Route>
           <Route path="/articles/:article_id" element={<Article />}></Route>
           <Route path="/topics" element={<Topics />}></Route>
-          <Route path="/topics/:topic" element={<ArticleList />}></Route>
           <Route path="/users/:username" element={<Users />}></Route>
-
-
+          <Route path="*" element={<p className='not-found'>Page not found :/</p>}></Route>
         </Routes>
       </UserAccountProvider>
-
     </>
   )
 }
