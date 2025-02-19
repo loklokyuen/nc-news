@@ -57,7 +57,7 @@ export default function Article(){
     if (loading) return <Loader/>;
     if (isError && !article) return <div className="not-found">{message}</div>
 
-    return <section className="w-80vw bg-shadow-green-300 text-green-kelp-800 mt-2">
+    return <section className="w-80vw bg-shadow-green-300 text-green-kelp-800 mt-2 justify-center items-center flex flex-col">
         <h2 className="font-extrabold text-2xl pt-4 text-shadow-green-600">Article</h2>
         <img src={article.article_img_url} alt="article image" className="p-4 w-80vw"/>
         <h3 className="font-bold text-xl m-2">{article.title}</h3>
