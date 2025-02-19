@@ -3,6 +3,7 @@ import { UserAccount } from "../contexts/UserAccount";
 import { deleteCommentById } from "../api";
 import SmallLoader from "./SmallLoader";
 import Voting from "./Voting";
+import { NavLink } from "react-router";
 
 export default function Comment({ comment, onCommentDeleted }) {
     const formattedDate = new Date(comment.created_at).toLocaleString();
@@ -36,7 +37,9 @@ export default function Comment({ comment, onCommentDeleted }) {
 
     return  <div className="border-t w-full border-highland-500 mt-1 p-2">
             <div className="flex justify-between items-center">
-                <span className="font-semibold text-green-kelp-500 text-left">{comment.author}</span>
+                <NavLink to={`/users/${comment.author}`}>
+                <span className="font-semibold text-green-kelp-500 hover:text-green-kelp-400 text-left">{comment.author}</span>
+                </NavLink>
                 <span className="text-right text-green-kelp-800">Posted on {formattedDate}</span>
             </div>
             <div className="flex justify-between items-center">
