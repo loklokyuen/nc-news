@@ -12,20 +12,32 @@ export default function NewComment({ articleId, onCommentPosted}) {
     
     function handleCommentSubmit(e){
         e.preventDefault()
+        if (!comment) {
+            setIsError(true)
+            setMessage('Please enter a comment before submitting.')
+            setTimeout(()=>setMessage(''), 3000)
+            return
+        }
+        if (!loggedInUser) {
+            setIsError(true)
+            setMessage('Please login before commenting.')
+            setTimeout(()=>setMessage(''), 3000)
+            return
+        }
         setLoading(true)
+        setIsError(false)
         setMessage('')
         postArticleComment(articleId, loggedInUser, comment)
-        .then(()=>{
+        .then(({ insertedComment })=>{
             setLoading(false)
             setComment('')
-            setMessage('Comment posted!')
-            setTimeout(()=>setMessage(''), 3000)
-            onCommentPosted({author: loggedInUser, body: comment, created_at: new Date().toISOString(), votes: 0})
+            onCommentPosted(insertedComment)
         })
         .catch((err)=>{
             setLoading(false)
             setIsError(true)
-            setMessage('Something went wrong! Unable to comment, please try again later.')
+            const errorMessage = err.response?.data?.msg || 'Something went wrong! Unable to comment, please try again later.'
+            setMessage(errorMessage)
             setTimeout(()=>setMessage(''), 3000)
         })
 
@@ -35,11 +47,11 @@ export default function NewComment({ articleId, onCommentPosted}) {
         className="resize-y border-2 border-shadow-green-500 rounded-md p-2 m-2 w-full" 
         placeholder="Write your comment here...">
         </textarea>
-        <button className="" onClick={handleCommentSubmit}>Submit</button>
+        <button onClick={handleCommentSubmit} disabled={loading}>Submit</button>
     </section>
         { loading && <div className="flex flex-col self-center items-center justify-center">
             <div className="small-loader"></div>
         </div>}
-        { message && <div className={`w-full m-1 ${ isError? "text-roman-700" : "border-shadow-green-500"}`}>{message}</div>}
+        { message && <div className={`message ${ isError? "text-mandys-pink-500 " : "text-shadow-green-500"}`}>{message}</div>}
     </>
 }

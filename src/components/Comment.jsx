@@ -11,9 +11,10 @@ export default function Comment({ comment, onCommentDeleted }) {
     const [isError, setIsError] = useState(false)
     const [loading, setLoading] = useState(false)
     
-
     function deleteComment(){
         setLoading(true)
+        setIsError(false)
+        setMessage('')
         deleteCommentById(comment.comment_id)
         .then(()=>{
             setMessage('Comment deleted!')
@@ -45,7 +46,7 @@ export default function Comment({ comment, onCommentDeleted }) {
             </div>
             <p className="text-right">Posted on {formattedDate}</p>
             <Voting votes={comment.votes} itemType="comment" id={comment.comment_id}></Voting>
-            { message && <div className={`bg-shadow-green-200/90 w-full m-1 ${ isError? "text-roman-600" : "border-shadow-green-500"}`}>{message}</div>}
+            { message && <div className={`message ${ isError? "text-mandys-pink-500" : "text-shadow-green-500"}`}>{message}</div>}
         </div>
         
         

@@ -56,6 +56,6 @@ export default function Voting({ votes, itemType, id }) {
                 {votes + currUpvote - currDownvote}
             </span>
         </p>
-            { isError && <div className="text-roman-700 m-1">Something went wrong! Unable to vote, please try again later.</div>}
+            { isError && <div className="text-mandys-pink-500 m-1">Something went wrong! Unable to vote, please try again later.</div>}
     </div>
 }
