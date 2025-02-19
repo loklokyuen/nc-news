@@ -62,7 +62,9 @@ export default function Article(){
             <h2 className="font-extrabold text-2xl pt-4 text-shadow-green-600">Article</h2>
             <img src={article.article_img_url} alt="article image" className="p-4 w-80vw"/>
             <h3 className="font-bold text-xl m-2">{article.title}</h3>
-            <p>{article.author}</p>
+            <NavLink to={`/users/${article.author}`}>
+                <h4 className="font-semibold text-green-kelp-600 hover:text-green-kelp-400">{article.author}</h4>
+            </NavLink>
             <NavLink to={`/articles?topic=${article.topic}`}>
                 <h4 className="font-semibold text-highland-600 hover:text-highland-400">Topic: {article.topic[0].toUpperCase() + article.topic.substring(1)}</h4>
             </NavLink>

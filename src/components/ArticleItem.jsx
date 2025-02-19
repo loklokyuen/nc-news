@@ -8,9 +8,11 @@ export default function ArticleItem({ article }){
             <img src={article.article_img_url} alt="article image" className="w-xl article-item-img p-2"/>
             <h4 className="text-highland-600 hover:text-highland-400 p-1 pt-0 text-lg font-bold">{article.title}</h4>
         </NavLink>
-        <p className="m-0.5">{article.author}</p>
+        <NavLink to={`/users/${article.author}`}>
+            <h4 className="font-semibold text-green-kelp-600 hover:text-green-kelp-400">{article.author}</h4>
+        </NavLink>
         <NavLink to={`/articles?topic=${article.topic}`}>
-            <p className="m-0.5 font-semibold text-highland-500 hover:text-highland-400">Topic: {article.topic[0].toUpperCase() + article.topic.slice(1)}</p>
+            <p className="m-0.5 font-semibold text-highland-600 hover:text-highland-400">Topic: {article.topic[0].toUpperCase() + article.topic.slice(1)}</p>
         </NavLink>
         <p className="m-0.5">Posted on {formattedDate}</p>
         <Voting votes={article.votes} itemType="article" id={article.article_id}></Voting>
