@@ -19,7 +19,7 @@ export default function CommentList({ articleId, commentCount }){
         setIsError(false)
         setMessage('')
         setTotalPages(Math.ceil(commentCount/10))
-        getCommentsByArticleId(articleId)
+        getCommentsByArticleId(articleId, currentPage)
         .then(({ comments })=>{
             setComments(comments)
             setIsLoading(false)
@@ -30,8 +30,14 @@ export default function CommentList({ articleId, commentCount }){
             const errorMessage = err.response?.data?.msg || 'Something went wrong! Unable to fetch comments, please try again later.'
             setMessage(errorMessage)
         })
-    }, [articleId])
+    }, [articleId, currentPage]) 
     
+    function handlePageChange(page){
+        setCurrentPage(page)
+        if (commentRef.current) {
+            commentRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
     function handleCommentPosted(comment){
         setComments(prevComments => [comment, ...prevComments])
         commentRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -46,23 +52,6 @@ export default function CommentList({ articleId, commentCount }){
         setTimeout(()=>setMessage(''), 3000)
     }
 
-    function handlePageChange(page){
-        setCurrentPage(page)
-        setIsLoading(true)
-        setIsError(false)
-        setMessage('')
-        getCommentsByArticleId(articleId, page)
-        .then(({ comments })=>{
-            setComments(comments)
-            setIsLoading(false)
-        })
-        .catch((err)=>{
-            setIsLoading(false)
-            setIsError(true)
-            const errorMessage = err.response?.data?.msg || 'Something went wrong! Unable to fetch comments, please try again later.'
-            setMessage(errorMessage)
-        })
-    }
     return <section ref={commentRef} className="comment-section border-2 p-2 border-shadow-green-400 outline-shadow-green-200/90 outline-solid outline-4 rounded-sm max-w-4xl w-full px-2">
         <h4 className="font-bold text-green-kelp-600 text-xl p-2 bg-shadow-green-100/70 m-1">Comments</h4>
         { isLoading && <Loader/>}
@@ -70,7 +59,7 @@ export default function CommentList({ articleId, commentCount }){
         { comments.map((comment)=>{
             return <Comment key={comment.comment_id} comment={comment} onCommentDeleted={handleCommentDeleted}></Comment>
         })}
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}></Pagination>
+        <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} onPageChanged={handlePageChange}></Pagination>
         <NewComment articleId={articleId} onCommentPosted={handleCommentPosted}></NewComment>
     </section>
 }

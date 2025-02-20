@@ -40,6 +40,13 @@ export default function ArticleList({ setActivePage }){
         })
     }, [sort_by, order, topic, currentPage]);
 
+    useEffect(()=>{
+        setCurrentPage(1)
+    }, [sort_by, order, topic])
+    
+    function handlePageChange(page){
+        setCurrentPage(page)
+    }
     if (loading) return <Loader />;
     if (isError) return <div className="not-found">{message}</div>
 
@@ -50,8 +57,8 @@ export default function ArticleList({ setActivePage }){
                 <i className="absolute float-right m-1 p-0 text-center justify-center text-shadow-green-500 bg-shadow-green-50 rounded-2xl hover:text-shadow-green-50 hover:bg-shadow-green-500 hover:border-shadow-green-500 hover:border fa-solid fa-circle-plus fa-md"></i>
             </NavLink>
         </h2>
-        <SortFilterBar topic={topic} sort_by={sort_by} order={order} setSearchParams={setSearchParams} setCurrentPage={setCurrentPage}></SortFilterBar>
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={numberOfPages}></Pagination>
+        <SortFilterBar topic={topic} sort_by={sort_by} order={order} setSearchParams={setSearchParams} ></SortFilterBar>
+        <Pagination currentPage={currentPage} onPageChanged={handlePageChange} totalPages={numberOfPages}></Pagination>
         <ul className="items-center flex flex-col flex-wrap justify-center md:flex-row md:grid-cols-3 md:items-stretch md:gap-x-4">
         { articles.map((article)=>{
             return <ArticleItem key={article.article_id} article={article}></ArticleItem>
