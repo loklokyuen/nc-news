@@ -5,14 +5,14 @@ import ArticleItem from "./ArticleItem"
 import Topic from "./Topic"
 
 export default function Home({ setActivePage }) {
-    setActivePage('home')
     const [latestArticles, setLatestArticles] = useState([])
     const [topics, setTopics] = useState([])
     const [loadingArticles, setLoadingArticles] = useState(true)
     const [loadingTopics, setLoadingTopics] = useState(true)
     const [isError, setIsError] = useState(false)
-
+    
     useEffect(()=>{
+        setActivePage('home')
         setLoadingArticles(true)
         setLoadingTopics(true)
         setIsError(false)
@@ -34,7 +34,7 @@ export default function Home({ setActivePage }) {
     },[])
     return <section className="items-center justify-center flex mt-4 flex-col">
         <section className="banner items-center h-60 justify-center flex m-auto">
-            <h1 className=" text-white text-4xl bg-shadow-green-600/70 rounded-md p-8 font-stretch-80% font-light italic">Northcoders News</h1>
+            <h1 className=" text-primary text-4xl bg-shadow-green-600/70 rounded-md p-8 font-stretch-80% font-light italic">Northcoders News</h1>
         </section>
         <section className="items-center justify-center flex flex-col">
             <h2 className="font-extrabold text-2xl pt-4 pb-2 text-shadow-green-600">Welcome to Northcoders News!</h2>

@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router";
-import { getArticleById, getCommentsByArticleId, patchArticleVote } from "../api";
-import Comment from "./Comment";
-import NewComment from "./NewComment";
+import { getArticleById } from "../api";
 import Loader from "./Loader";
 import Voting from "./Voting";
 import CommentList from "./CommentList";

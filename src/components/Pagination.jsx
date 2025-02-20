@@ -2,7 +2,7 @@ export default function Pagination({ currentPage, setCurrentPage, totalPages }) 
     const pageNumbers = [];
     const showPagesBefore = 2;
     const showPagesAfter = 2;
-    if ( totalPages === 1) return;
+    if ( totalPages <= 1) return;
     if ( totalPages <= 5 ){
         for (let i = 1; i <= totalPages; i++) {
             pageNumbers.push(i);

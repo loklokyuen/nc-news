@@ -38,9 +38,9 @@ export const getCommentsByArticleId = (article_id, page, limit)=>{
     })
 }
 
-export const patchArticleVote = (article_id, voteChange)=>{
-    return newsAPI.patch(`/articles/${article_id}`, {
-        inc_votes: voteChange
+export const postArticle = (author, title, body, topic, article_img_url)=>{    
+    return newsAPI.post(`/articles`, {
+        author, title, body, topic, article_img_url
     })
     .then(({ data })=>{
         return data
@@ -56,6 +56,15 @@ export const postArticleComment = (article_id, username, body)=>{
         return data
     })
 }
+export const patchArticleVote = (article_id, voteChange)=>{
+    return newsAPI.patch(`/articles/${article_id}`, {
+        inc_votes: voteChange
+    })
+    .then(({ data })=>{
+        return data
+    })
+}
+
 
 export const patchCommentVote = (comment_id, voteChange)=>{
     return newsAPI.patch(`/comments/${comment_id}`, {

@@ -13,8 +13,8 @@ export default function Users({ setActivePage}) {
     const params = useParams();
     const username = params.username;
 
-    setActivePage('users');
     useEffect(()=>{
+        setActivePage('users');
         setLoading(true)
         setIsError(false)
         setMessage('')
