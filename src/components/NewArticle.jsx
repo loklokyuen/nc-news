@@ -1,3 +1,3 @@
-export default function NewArticle({ setCurrentPage }) {
-    setCurrentPage('new-article')
+export default function NewArticle({ setActivePage }) {
+    setActivePage('new-article')
 }

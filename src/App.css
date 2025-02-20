@@ -114,6 +114,35 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.pagination {
+  font-size: medium;
+  color: var(--color-shadow-green-50);
+  background-color: var(--color-shadow-green-400);
+  border: 2px solid var(--color-shadow-green-100);
+  font-weight: 700;
+}
+
+.pagination:hover {
+  background-color: var(--color-shadow-green-100);
+  color: var(--color-shadow-green-400);
+}
+
+.pagination[aria-disabled="true"] {
+  background-color: var(--color-shadow-green-200);
+  color: var(--color-gray-200);
+  cursor: not-allowed;
+}
+
+.pagination-current {
+  color: var(--color-shadow-green-400);
+  background-color: var(--color-shadow-green-100);
+}
+
+.current-page {
+  background-color: var(--color-shadow-green-100) !important;
+  color: var(--color-shadow-green-400) !important;
+}
+
 .loader {
   border: 16px solid #f3f3f3; 
   border-top: 16px solid var(--color-shadow-green-500);
@@ -138,7 +167,7 @@ button:disabled {
 }
 
 .not-found {
- @apply text-mandys-pink-500 m-2 font-semibold bg-mandys-pink-50/50 p-4
+ @apply text-mandys-pink-500 m-2 font-semibold bg-mandys-pink-50/50 p-4 max-w-xl mx-auto
 }
 
 .message {

@@ -47,11 +47,7 @@ export default function Comment({ comment, onCommentDeleted }) {
             { comment.author === loggedInUser && <span className="text-right top-0 m-1">
                 <i className="fa-regular fa-circle-xmark text-mandys-pink-700 fa-lg" onClick={deleteComment}></i></span>}
             </div>
-            
             <Voting votes={comment.votes} itemType="comment" id={comment.comment_id}></Voting>
             { message && <div className={`message ${ isError? "text-mandys-pink-500" : "text-shadow-green-500"}`}>{message}</div>}
-
-        
-        
     </div>
 }

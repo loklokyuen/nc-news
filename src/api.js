@@ -10,7 +10,7 @@ export const getArticles = (sort_by, order, topic, page, limit)=>{
             sort_by,
             order,
             topic,
-            p: page, 
+            p: page,
             limit
         }
     })
@@ -26,8 +26,13 @@ export const getArticleById = (article_id)=>{
     })
 }
 
-export const getCommentsByArticleId = (article_id)=>{
-    return newsAPI.get(`/articles/${article_id}/comments`)
+export const getCommentsByArticleId = (article_id, page, limit)=>{
+    return newsAPI.get(`/articles/${article_id}/comments`, {
+        params: {
+            p: page,
+            limit
+        }
+    })
     .then(({ data })=>{
         return data
     })

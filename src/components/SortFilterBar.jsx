@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getTopics } from "../api"
 import { useNavigate } from "react-router"
 
-export default function SortFilterBar({ topic, sort_by, order, setSearchParams }) {
+export default function SortFilterBar({ topic, sort_by, order, setSearchParams, setCurrentPage }) {
     const [topics, setTopics] = useState([])
 
 
@@ -30,13 +30,13 @@ export default function SortFilterBar({ topic, sort_by, order, setSearchParams }
         <div className="flex sm:flex-col md:flex-row justify-around mt-2 items-stretch flex-wrap">
             <div className="flex flex-row items-center">
                 <label htmlFor="sort_by" className="text-highland-600 font-bold">Sort By:</label>
-                <select name="sort_by" id="sort_by" value={sort_by} onChange={(e)=>{ updateSearchParams("sort_by", e.target.value)}} 
+                <select name="sort_by" id="sort_by" value={sort_by} onChange={(e)=>{ updateSearchParams("sort_by", e.target.value); setCurrentPage(1)}} 
                 className="text-highland-600 bg-shadow-green-100 m-1 p-1.5 rounded-sm font-semibold">
                     <option value="created_at">Date Created</option>
                     <option value="votes">Votes</option>
                     <option value="comment_count">Comments</option>
                 </select>
-                <select name="order" id="order" value={order} onChange={(e)=>{ updateSearchParams("order", e.target.value)}} 
+                <select name="order" id="order" value={order} onChange={(e)=>{ updateSearchParams("order", e.target.value); setCurrentPage(1)}} 
                 className="text-highland-600 bg-shadow-green-100 m-1 p-1.5 rounded-sm font-semibold">
                     <option value="desc">Descending</option>
                     <option value="asc">Ascending</option>
@@ -45,7 +45,7 @@ export default function SortFilterBar({ topic, sort_by, order, setSearchParams }
             <div className="flex flex-row items-center">
                 <label htmlFor="currentTopic" className="text-highland-600 font-bold">Filter By Topic:</label>
                 <select name="currentTopic" id="currentTopic" value={topic || "all"} 
-                onChange={(e)=>{updateSearchParams("topic", e.target.value)}} 
+                onChange={(e)=>{updateSearchParams("topic", e.target.value); setCurrentPage(1)}} 
                  className="text-highland-600 bg-shadow-green-100 m-1 p-1.5 rounded-sm font-semibold">
                     <option value="all">All</option>
                     { topics.map((topic)=>{

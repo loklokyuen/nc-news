@@ -44,7 +44,7 @@ export default function NewComment({ articleId, onCommentPosted}) {
     }
     return <><section className="flex flex-row items-center border-t border-highland-500 ">
         <textarea value={comment} id="new-comment" name="new-comment" onChange={(e)=>setComment(e.target.value)}
-        className="resize-y border-2 border-shadow-green-500 rounded-md p-2 m-2 w-full" 
+        className="resize-y border-2 border-shadow-green-500 rounded-md p-2 m-2 w-full bg-shadow-green-200/70" 
         placeholder="Write your comment here...">
         </textarea>
         <button onClick={handleCommentSubmit} disabled={loading}>Submit</button>
