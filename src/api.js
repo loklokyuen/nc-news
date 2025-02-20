@@ -65,6 +65,12 @@ export const patchArticleVote = (article_id, voteChange)=>{
     })
 }
 
+export const deleteArticleById = (article_id)=>{
+    return newsAPI.delete(`/articles/${article_id}`)
+    .then(({ status })=>{
+        return status
+    })
+}
 
 export const patchCommentVote = (comment_id, voteChange)=>{
     return newsAPI.patch(`/comments/${comment_id}`, {
@@ -77,8 +83,8 @@ export const patchCommentVote = (comment_id, voteChange)=>{
 
 export const deleteCommentById = (comment_id)=>{
     return newsAPI.delete(`/comments/${comment_id}`)
-    .then(({ data })=>{
-        return data
+    .then(({ status })=>{
+        return status
     })
 }
 
