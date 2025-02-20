@@ -95,3 +95,12 @@ export const getTopics = ()=>{
         return data
     })
 }
+
+export const postTopic = (slug, description)=>{
+    return newsAPI.post("/topics", {
+        slug, description
+    })
+    .then(({ data })=>{
+        return data
+    })
+}

@@ -3,7 +3,8 @@ import { getTopics, postArticle } from "../api"
 import { UserAccount } from "../contexts/UserAccount";
 import Loader from "./Loader";
 import { NavLink } from "react-router";
-
+import NewTopic from "./NewTopic";
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 
 export default function NewArticle({ setActivePage }) {
     const { loggedInUser } = useContext(UserAccount);
@@ -22,6 +23,7 @@ export default function NewArticle({ setActivePage }) {
     const [topicErrorMessage, setTopicErrorMessage] = useState('')
     const [imageErrorMessage, setImageErrorMessage] = useState('')
     const [newArticleId, setNewArticleId] = useState(null)
+    const [createNewTopic, setCreateNewTopic] = useState(false)
 
     useEffect(()=>{
         setActivePage('new-article')
@@ -61,7 +63,15 @@ export default function NewArticle({ setActivePage }) {
             }
             image.src = url;
         })
-      }
+    }
+
+    function handleTopicAdded(topic) {
+        setTopics([...topics, topic])
+    }
+    
+    function handleTopicCreation(){
+        setCreateNewTopic(true)
+    }
 
     async function handleArticleSubmit(e){
         setNewArticleId('')
@@ -153,7 +163,18 @@ export default function NewArticle({ setActivePage }) {
                                 return <option key={topic.slug} value={topic.slug}>{topic.slug[0].toUpperCase() + topic.slug.slice(1)}</option>
                             })}
                         </select>
+                        <div className="flex flex-row items-center"> 
+                            <span className="m-1">or</span>  
+                            <button className="text-nowrap" onClick={handleTopicCreation} disabled={loading}>Create a new topic</button>
+                        </div>
+                        <Dialog open={createNewTopic} onClose={() => setCreateNewTopic(false)} className="fixed inset-0 z-10 flex items-center justify-center rounded-xl ">
+                            <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
+                            <DialogPanel className="relative bg-white rounded-lg shadow-xl max-w-md w-full ">
+                                <NewTopic setCreateNewTopic={setCreateNewTopic} onTopicCreated={handleTopicAdded}/>
+                            </DialogPanel>
+                        </Dialog>
                     </div>
+                    
                 </div>
                 <div className="flex flex-row items-center">
                     <label htmlFor="new-article_img_url" className="text-highland-600 font-bold p-1 m-1 text-nowrap">Article Image URL: </label>
