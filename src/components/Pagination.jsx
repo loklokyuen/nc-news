@@ -25,7 +25,7 @@ export default function Pagination({ currentPage, setCurrentPage, totalPages }) 
     return <nav aria-label="Page navigation" className="mb-2">
         <p className="text-highland-400 font-semibold">Page {currentPage} of {totalPages}</p>
         <ul className="flex items-center -space-x-px h-8 text-sm justify-center">
-            <li onClick={()=>setCurrentPage(currentPage-1)}>
+            <li onClick={()=>{ if (currentPage > 1) setCurrentPage(currentPage-1)}}>
                 <a href="#" aria-disabled={currentPage === 1 ? "true" : "false"}
                 className="pagination flex items-center justify-center px-3 h-8 ms-0 leading-tight rounded-s-lg">
                     <span className="sr-only">Previous</span>
@@ -38,7 +38,7 @@ export default function Pagination({ currentPage, setCurrentPage, totalPages }) 
                 </li>})
             }
    
-            <li onClick={()=>setCurrentPage(currentPage+1)}>
+            <li onClick={()=> {if (currentPage < totalPages )setCurrentPage(currentPage+1)}}>
                 <a href="#" aria-disabled={currentPage === totalPages ? "true" : "false"}
                 className={`pagination flex items-center justify-center px-3 h-8 leading-tight rounded-e-lg ${currentPage === totalPages? "pointer-events-none": null}`}>
                     <span className="sr-only">Next</span>
