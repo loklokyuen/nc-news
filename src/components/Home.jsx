@@ -3,6 +3,7 @@ import { getArticles, getTopics } from "../api"
 import Loader from "./Loader"
 import ArticleItem from "./ArticleItem"
 import Topic from "./Topic"
+import { NavLink } from "react-router";
 
 export default function Home({ setActivePage }) {
     const [latestArticles, setLatestArticles] = useState([])
@@ -24,7 +25,7 @@ export default function Home({ setActivePage }) {
             return getTopics()
         })
         .then(({ topics })=>{
-            setTopics(topics)
+            setTopics(topics.slice(0, 4))
             setLoadingTopics(false)
         })
         .catch((err)=>{
@@ -42,19 +43,27 @@ export default function Home({ setActivePage }) {
         </section>
         <section className="items-center justify-center flex flex-col">
             <h2 className="font-bold text-2xl pt-4 text-shadow-green-600 italic">Check out the latest articles</h2>
-            <ul className="w-full max-w-3xl">
+            <ul className="w-full max-w-3xl flex flex-col md:flex-row md:gap-4">
                 {latestArticles.map((article)=>{
                     return <ArticleItem key={article.article_id} article={article}></ArticleItem>
                 })}
             </ul>
+            <NavLink to="/articles">
+                <button>View All Articles</button>
+            </NavLink>
             {loadingArticles && <Loader key="articles-loader"/>}
             {isError && latestArticles.length === 0&& <div className="not-found">Something went wrong! Unable to fetch articles, please try again later.</div>}
         </section>
-        <section className="items-start justify-center flex flex-col md:flex-row">
+        <section className="items-start justify-center flex flex-col">
             <h2 className="font-bold text-2xl p-2 text-shadow-green-600 italic">Or choose from a topic</h2>
             { topics.map((topic)=>{
                 return <Topic key={topic.slug} topic={topic}></Topic>
             })}
+            <div className="items-center w-full m-2 p-1">
+             <NavLink to="/topics">
+                <button>View All Topics</button>
+            </NavLink>
+            </div>
             {loadingTopics && <Loader key="topics-loader"/>}
             {isError && topics.length === 0 && <div className="not-found">Something went wrong! Unable to fetch topics, please try again later.</div>}
         </section>
