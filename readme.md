@@ -3,7 +3,8 @@
 A web platform for reading articles, participating in discussions through comments, and engaging with content via voting. This is the frontend portion of the News and Discussion platform. The backend API repository can be found [here](https://github.com/loklokyuen/news-website-project).
 
 ## Features
-- Retrieve, sort, and filter news articles by topic
+- Retrieve, sort, and filter articles by topic
+- Post new articles
 - Vote on articles and comments
 - Post and delete comments
 - Display articles by specific topics

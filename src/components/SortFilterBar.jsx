@@ -29,8 +29,8 @@ export default function SortFilterBar({ topic, sort_by, order, setSearchParams, 
     return <section>
         <div className="flex sm:flex-col md:flex-row justify-around mt-2 items-stretch flex-wrap">
             <div className="flex flex-row items-center">
-                <label htmlFor="sort_by" className="text-highland-600 font-bold">Sort By:</label>
-                <select name="sort_by" id="sort_by" value={sort_by} onChange={(e)=>{ updateSearchParams("sort_by", e.target.value); setCurrentPage(1)}} 
+                <label htmlFor="sort-by" className="text-highland-600 font-bold">Sort By:</label>
+                <select name="sort-by" id="sort-by" value={sort_by} onChange={(e)=>{ updateSearchParams("sort_by", e.target.value); setCurrentPage(1)}} 
                 className="text-highland-600 bg-shadow-green-100 m-1 p-1.5 rounded-sm font-semibold">
                     <option value="created_at">Date Created</option>
                     <option value="votes">Votes</option>
@@ -43,8 +43,8 @@ export default function SortFilterBar({ topic, sort_by, order, setSearchParams, 
                 </select>
             </div>
             <div className="flex flex-row items-center">
-                <label htmlFor="currentTopic" className="text-highland-600 font-bold">Filter By Topic:</label>
-                <select name="currentTopic" id="currentTopic" value={topic || "all"} 
+                <label htmlFor="current-topic" className="text-highland-600 font-bold">Filter By Topic:</label>
+                <select name="current-topic" id="current-topic" value={topic || "all"} 
                 onChange={(e)=>{updateSearchParams("topic", e.target.value); setCurrentPage(1)}} 
                  className="text-highland-600 bg-shadow-green-100 m-1 p-1.5 rounded-sm font-semibold">
                     <option value="all">All</option>
