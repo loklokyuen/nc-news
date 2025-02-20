@@ -3,7 +3,7 @@ import Voting from "./Voting";
 
 export default function ArticleItem({ article }){
     const formattedDate = new Date(article.created_at).toLocaleString();
-    return <li className="article-item text-green-kelp-800 w-sm rounded-sm bg-shadow-green-300 m-1">
+    return <li className="article-item text-green-kelp-800 w-sm rounded-sm bg-shadow-green-300">
         <NavLink to={"/articles/" + article.article_id}>
             <img src={article.article_img_url} alt="article image" className="w-xl article-item-img p-2"/>
             <h4 className="text-highland-600 hover:text-highland-400 p-1 pt-0 text-lg font-bold">{article.title}</h4>

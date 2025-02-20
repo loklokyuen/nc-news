@@ -5,14 +5,13 @@ import Comment from "./Comment";
 import NewComment from "./NewComment";
 import Loader from "./Loader";
 import Voting from "./Voting";
+import CommentList from "./CommentList";
 
 export default function Article(){
     const [article, setArticle] = useState(null)
-    const [comments, setComments] = useState([])
     const [isError, setIsError] = useState(false)
     const [loading, setLoading] = useState(true)
     const [message, setMessage] = useState('')
-    const commentRef = useRef(null)
 
     const params = useParams();
     const articleId = params.article_id;
@@ -25,10 +24,6 @@ export default function Article(){
             const formattedDate = new Date(article.created_at).toLocaleString();
             article.created_at = formattedDate
             setArticle(article)
-            return getCommentsByArticleId(articleId)
-        })
-        .then(({ comments })=>{
-            setComments(comments)
             setLoading(false)
         })
         .catch((err)=>{
@@ -39,20 +34,7 @@ export default function Article(){
         })
     }, [articleId])
 
-    function handleCommentPosted(comment){
-        setComments(prevComments => [comment, ...prevComments])
-        commentRef.current.scrollIntoView({ behavior: 'smooth' });
-        setMessage('Comment posted!')
-        setTimeout(()=>setMessage(''), 3000)
 
-    }
-
-    function handleCommentDeleted(commentId){
-        setComments(prevComments => prevComments.filter((comment)=> comment.comment_id !== commentId))
-        commentRef.current.scrollIntoView({ behavior: 'smooth' });
-        setMessage('Comment deleted!')
-        setTimeout(()=>setMessage(''), 3000)
-    }
 
     if (loading) return <Loader/>;
     if (isError && !article) return <div className="not-found">{message}</div>
@@ -72,14 +54,7 @@ export default function Article(){
             <p className="p-4 pt-2 text-left">{article.body}</p>
 
             <Voting votes={article.votes} itemType="article" id={articleId}></Voting>
-            <section ref={commentRef} className="comment-section border-2 p-2 border-shadow-green-400 outline-shadow-green-200/90 outline-solid outline-4 rounded-sm max-w-3xl w-full px-2">
-                <h4 className="font-bold text-green-kelp-600 text-xl p-2 bg-shadow-green-100/70 m-1">Comments</h4>
-                { message && <div className={`message ${ isError? "text-mandys-pink-500" : "text-shadow-green-500"}`}>{message}</div>}
-                { comments.map((comment)=>{
-                    return <Comment key={comment.comment_id} comment={comment} onCommentDeleted={handleCommentDeleted}></Comment>
-                })}
-                <NewComment articleId={articleId} onCommentPosted={handleCommentPosted}></NewComment>
-            </section>
+            <CommentList articleId={articleId} commentCount={article.comment_count}></CommentList>
         </section>
     </div>
 }

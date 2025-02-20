@@ -4,7 +4,7 @@ import { getUserInfoByUsername } from "../api";
 import { useParams } from "react-router";
 import Loader from "./Loader";
 
-export default function Users({ setCurrentPage}) {
+export default function Users({ setActivePage}) {
     const [user, setUser] = useState(null);
     const { loggedInUser } = useContext(UserAccount);
     const [isError, setIsError] = useState(false)
@@ -13,25 +13,23 @@ export default function Users({ setCurrentPage}) {
     const params = useParams();
     const username = params.username;
 
+    setActivePage('users');
     useEffect(()=>{
         setLoading(true)
         setIsError(false)
         setMessage('')
         getUserInfoByUsername(username)
         .then(({ user })=>{
-            console.log(user);
             setLoading(false)
             setUser(user)
         })
         .catch((err)=>{
-            console.log(err)
             setLoading(false)
             setIsError(true)
             const errorMessage = err.response?.data?.msg || 'Something went wrong! Unable to fetch user, please try again later.'
             setMessage(errorMessage)
         })
     }, [username])
-    setCurrentPage('users');
     if (loading) return <Loader/>;
     if (isError && !user) return <div className="not-found">{message}</div>
     return <section>

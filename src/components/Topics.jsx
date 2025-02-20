@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Topic from "./Topic";
 import { getTopics } from "../api";
 
-export default function Topics({ setCurrentPage }) {
-    setCurrentPage('topics')
+export default function Topics({ setActivePage }) {
+    setActivePage('topics')
     const [topics, setTopics] = useState([])
 
     useEffect(()=>{
