@@ -1,4 +1,4 @@
-# News and Discussion
+# Northcoders News
 
 A web platform for reading articles, participating in discussions through comments, and engaging with content via voting. This is the frontend portion of the News and Discussion platform. The backend API repository can be found [here](https://github.com/loklokyuen/news-website-project).
 
