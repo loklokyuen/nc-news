@@ -2,14 +2,16 @@ export default function Pagination({ currentPage, setCurrentPage, totalPages }) 
     const pageNumbers = [];
     const showPagesBefore = 2;
     const showPagesAfter = 2;
+    let startPage;
+    let endPage;
     if ( totalPages <= 1) return;
     if ( totalPages <= 5 ){
         for (let i = 1; i <= totalPages; i++) {
             pageNumbers.push(i);
         }
     } else {
-        let startPage = Math.max(1, currentPage - showPagesBefore);
-        let endPage = Math.min(totalPages, currentPage + showPagesAfter);
+        startPage = Math.max(1, currentPage - showPagesBefore);
+        endPage = Math.min(totalPages, currentPage + showPagesAfter);
     
         for (let i = startPage; i <= endPage; i++) {
             pageNumbers.push(i);
@@ -32,12 +34,16 @@ export default function Pagination({ currentPage, setCurrentPage, totalPages }) 
                     <i className="fa-solid fa-angle-left"></i>
                 </a>
             </li>
-            { pageNumbers.map((pageNumber)=>{
-                return <li key={pageNumber} onClick={()=>setCurrentPage(pageNumber)}>
+            { pageNumbers.map((pageNumber, index)=>{
+                return <li key={pageNumber} onClick={()=>{
+                    if (pageNumber === "..."){
+                        if (index === 0) setCurrentPage(startPage-1)
+                        else setCurrentPage(endPage+1)
+                    } else setCurrentPage(pageNumber)
+                    }}>
                     <a href="#" className={`pagination flex items-center justify-center px-3 h-8 leading-tight  ${pageNumber === currentPage? "pagination-current": null}`}>{pageNumber}</a>
                 </li>})
             }
-   
             <li onClick={()=> {if (currentPage < totalPages )setCurrentPage(currentPage+1)}}>
                 <a href="#" aria-disabled={currentPage === totalPages ? "true" : "false"}
                 className={`pagination flex items-center justify-center px-3 h-8 leading-tight rounded-e-lg ${currentPage === totalPages? "pointer-events-none": null}`}>
