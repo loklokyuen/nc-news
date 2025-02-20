@@ -34,10 +34,13 @@ export default function CommentList({ articleId, commentCount }){
     
     function handlePageChange(page){
         setCurrentPage(page)
-        if (commentRef.current) {
-            commentRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
+        setTimeout(()=>{
+            if (commentRef.current) {
+                commentRef.current.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 0)
     }
+
     function handleCommentPosted(comment){
         setComments(prevComments => [comment, ...prevComments])
         commentRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -59,7 +62,7 @@ export default function CommentList({ articleId, commentCount }){
         { comments.map((comment)=>{
             return <Comment key={comment.comment_id} comment={comment} onCommentDeleted={handleCommentDeleted}></Comment>
         })}
-        <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} onPageChanged={handlePageChange}></Pagination>
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChanged={handlePageChange}></Pagination>
         <NewComment articleId={articleId} onCommentPosted={handleCommentPosted}></NewComment>
     </section>
 }
