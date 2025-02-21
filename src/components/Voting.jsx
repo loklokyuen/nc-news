@@ -52,7 +52,7 @@ export default function Voting({ votes, itemType, id }) {
         }
     }
     return <div className="flex justify-center items-center w-full flex-wrap flex-col">
-        <p className={`${itemType === "comment"? "justify-start": " justify-center"} flex items-center bg-shadow-green-200/80 rounded-sm p-0.5 w-full`}>
+        <p className={`${itemType === "comment"? "justify-start": " justify-center"} flex items-center bg-surface/80 rounded-sm p-0.5 w-full`}>
             {currUpvote === 1 ?
             <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-solid fa-thumbs-up m-1 text-highland-500`} onClick={handleUpvote}></i> : 
             <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-regular fa-thumbs-up m-1 text-highland-500`}  onClick={handleUpvote}></i>}
@@ -63,6 +63,6 @@ export default function Voting({ votes, itemType, id }) {
                 {votes + currUpvote - currDownvote}
             </span>
         </p>
-            { isError && <div className="text-mandys-pink-500 m-1">Something went wrong! Unable to vote, please try again later.</div>}
+            { isError && <div className="text-feedback-error m-1">Something went wrong! Unable to vote, please try again later.</div>}
     </div>
 }

@@ -25,7 +25,7 @@ export default function Pagination({ currentPage, onPageChanged, totalPages }) {
     }
 
     return <nav aria-label="Page navigation" className="mb-2">
-        <p className="text-highland-400 font-semibold">Page {currentPage} of {totalPages}</p>
+        <p className="text-tertiary-light font-semibold">Page {currentPage} of {totalPages}</p>
         <ul className="flex items-center -space-x-px h-8 text-sm justify-center">
             <li onClick={()=>{ if (currentPage > 1) onPageChanged(currentPage-1)}}>
                 <a href="#" aria-disabled={currentPage === 1 ? "true" : "false"}

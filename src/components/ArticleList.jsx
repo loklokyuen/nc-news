@@ -16,7 +16,7 @@ export default function ArticleList({ setActivePage }){
     const [numberOfPages, setNumberOfPages] = useState(1)
 
     const [searchParams, setSearchParams] = useSearchParams();
-    const topic = searchParams.get("topic");
+    const topic = searchParams.get("topic") || "";
     const sort_by = searchParams.get("sort_by");
     const order = searchParams.get("order");
 
@@ -51,9 +51,9 @@ export default function ArticleList({ setActivePage }){
     if (isError) return <div className="not-found">{message}</div>
 
     return <div>
-        <h2 className="font-bold text-2xl pt-4 text-shadow-green-600">
+        <h2 className="title">
             {topic? topic[0].toUpperCase() + topic.slice(1): "All Articles"} ({totalNumberOfArticles})
-            <NavLink to="/articles/add">
+            <NavLink to="/articles/add" aria-label="Add Article">
                 <i className="absolute float-right m-1 p-0 text-center justify-center text-shadow-green-500 bg-shadow-green-50 rounded-2xl hover:text-shadow-green-50 hover:bg-shadow-green-500 hover:border-shadow-green-500 hover:border fa-solid fa-circle-plus fa-md"></i>
             </NavLink>
         </h2>

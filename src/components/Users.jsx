@@ -34,7 +34,7 @@ export default function Users({ setActivePage}) {
     if (isError && !user) return <div className="not-found">{message}</div>
     return <section>
         <img src={user.avatar_url} alt={user.username + " avatar"} className="rounded-full h-24 w-24 mx-auto mt-4"/>
-        <h2 className="text-center text-2xl font-bold text-shadow-green-600 p-2">{user.username}</h2>
+        <h2 className="title m-2">{user.username}</h2>
         <p className="text-center text-green-kelp-600 text-xl font-light">{username === loggedInUser? "Hi " : "Name: "} {user.name}</p>
     </section>
 }
