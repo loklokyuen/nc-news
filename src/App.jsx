@@ -9,6 +9,7 @@ import Topics from './components/Topics'
 import Users from './components/Users'
 import NavBar from './components/NavBar'
 import NewArticle from './components/NewArticle'
+import Footer from './components/Footer'
 
 function App() {
   const [activePage, setActivePage] = useState('')
@@ -25,6 +26,7 @@ function App() {
           <Route path="/users/:username" element={<Users setActivePage={setActivePage}/>}></Route>
           <Route path="*" element={<p className='not-found'>Page not found :/</p>}></Route>
         </Routes>
+        <Footer />
       </UserAccountProvider>
     </>
   )
