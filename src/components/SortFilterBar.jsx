@@ -28,13 +28,13 @@ export default function SortFilterBar({ topic, sort_by, order, setSearchParams }
             <div className="flex flex-row items-center">
                 <label htmlFor="sort-by" className="text-tertiary font-bold">Sort By:</label>
                 <select name="sort-by" id="sort-by" value={sort_by || ""} onChange={(e)=>{ updateSearchParams("sort_by", e.target.value)}} 
-                className="text-tertiary bg-surface/50 m-1 p-1.5 rounded-sm font-semibold">
+                className="text-tertiary bg-surface/80 m-1 p-1.5 rounded-sm font-semibold">
                     <option value="created_at">Date Created</option>
                     <option value="votes">Votes</option>
                     <option value="comment_count">Comments</option>
                 </select>
                 <select name="order" id="order" value={order || ""} onChange={(e)=>{ updateSearchParams("order", e.target.value)}} 
-                className="text-tertiary bg-surface/50 m-1 p-1.5 rounded-sm font-semibold">
+                className="text-tertiary bg-surface/80 m-1 p-1.5 rounded-sm font-semibold">
                     <option value="desc">Descending</option>
                     <option value="asc">Ascending</option>
                 </select>
@@ -43,7 +43,7 @@ export default function SortFilterBar({ topic, sort_by, order, setSearchParams }
                 <label htmlFor="current-topic" className="text-tertiary font-bold">Filter By Topic:</label>
                 <select name="current-topic" id="current-topic" value={topic || "all"} 
                 onChange={(e)=>{updateSearchParams("topic", e.target.value)}} 
-                 className="text-tertiary bg-surface/50 m-1 p-1.5 rounded-sm font-semibold">
+                 className="text-tertiary bg-surface/80 m-1 p-1.5 rounded-sm font-semibold">
                     <option value="all">All</option>
                     { topics.map((topic)=>{
                         return <option key={topic.slug} value={topic.slug}>{topic.slug[0].toUpperCase() + topic.slug.slice(1)}</option>

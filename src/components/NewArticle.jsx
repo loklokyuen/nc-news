@@ -159,7 +159,7 @@ export default function NewArticle({ setActivePage }) {
                 </div>
                 <div className="flex flex-row items-center justify-center flex-wrap w-full">
                     <div className="flex flex-row items-center my-1 w-full"> 
-                        <label htmlFor="new-article-title" className="text-tertiary font-bold p-1 m-1 text-nowrap">Topic:</label>
+                        <label htmlFor="new-article-topic" className="text-tertiary font-bold p-1 m-1 text-nowrap">Topic:</label>
                         <select name="new-article-topic" id="new-article-topic" value={topic} 
                         onChange={(e)=>{setTopic(e.target.value); setTopicErrorMessage('')}} 
                             className="text-tertiary bg-surface m-1 p-1.5 rounded-sm font-semibold">
@@ -187,15 +187,18 @@ export default function NewArticle({ setActivePage }) {
                     onChange={(e)=>{setImageURL(e.target.value); setImageErrorMessage('')}}></input>
                 </div>
             </section>
-            <textarea value={body} id="new-article-body" name="new-article-body"  rows={10}
-            onChange={(e)=>{
-                setBody(e.target.value); 
-                setBodyErrorMessage('');
-                if (title !== '' && body !== '' && topic !== '') setMessage('')
-            }}
-            className={`resize-y border-2 border-feedback-success rounded-md p-2 m-2 text-shadow-green-800 bg-surface w-9/10 max-w-xl ${ bodyErrorMessage ? "error-input": null}`}
-            placeholder="Write your article here...">
-            </textarea>
+            <div className="flex flex-col items-center my-1 w-full"> 
+                <label htmlFor="new-article-body" className="text-tertiary font-bold p-1 m-2 text-left">Article Body: </label>
+                <textarea value={body} id="new-article-body" name="new-article-body" rows={10}
+                onChange={(e)=>{
+                    setBody(e.target.value); 
+                    setBodyErrorMessage('');
+                    if (title !== '' && body !== '' && topic !== '') setMessage('')
+                }}
+                className={`resize-y border-2 border-feedback-success rounded-md p-2 m-2 text-shadow-green-800 bg-surface w-9/10 max-w-xl ${ bodyErrorMessage ? "error-input": null}`}
+                placeholder="Write your article here...">
+                </textarea>
+            </div>
             <button onClick={handleArticleSubmit} disabled={loading}>Submit</button>
             
         </section>
