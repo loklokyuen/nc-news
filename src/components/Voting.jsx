@@ -59,7 +59,7 @@ export default function Voting({ votes, itemType, id }) {
             {currDownvote === 1 ? 
             <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-solid fa-thumbs-down m-1 text-mandys-pink-700`} onClick={handleDownvote}></i>:
             <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-regular fa-thumbs-down m-1 text-mandys-pink-700`} onClick={handleDownvote}></i>}
-            <span className={`font-bold ${votes >= 0 ? "text-tertiary":"text-mandys-pink-700"} ${itemType === "comment"? "text-md": "text-lg"} `}>
+            <span className={`font-bold ${votes >= 0 ? "text-highland-500":"text-mandys-pink-700"} ${itemType === "comment"? "text-md": "text-lg"} `}>
                 {votes + currUpvote - currDownvote}
             </span>
         </p>
