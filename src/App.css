@@ -150,7 +150,7 @@ button:disabled {
 }
 
 .pagination:hover {
-  background-color: var(--color-shadow-green-100);
+  background-color: var(--color-shadow-green-50);
   color: var(--color-primary-light);
 }
 
@@ -162,7 +162,7 @@ button:disabled {
 
 .pagination-current {
   color: var(--color-primary-light);
-  background-color: var(--color-shadow-green-100);
+  background-color: var(--color-shadow-green-50);
 }
 
 .current-page {
