@@ -34,7 +34,7 @@ export default function NewArticle({ setActivePage }) {
         .then(({ topics })=>{
             setTopics(topics)
             setLoading(false)
-            if (topics) setTopic(topics[0].slug)
+            if (topics.length > 0) setTopic(topics[0].slug)
         })
         .catch((err)=>{
             setIsError(true)
@@ -76,30 +76,34 @@ export default function NewArticle({ setActivePage }) {
     async function handleArticleSubmit(e){
         setNewArticleId('')
         e.preventDefault();
+        let hasError = false;
         if (title === '' || body === '' || topic === ''){
             setIsError(true)
             if ( title === '' ) setTitleErrorMessage("- Please enter a title.")
             if ( body === '' ) setBodyErrorMessage("- Please enter an article body.")
             if ( topic === '' ) setTopicErrorMessage("- Please choose from a topic.")
             setMessage("Please enter all the required fields before submitting.")
-            if (topRef.current) topRef.current.scrollIntoView({ behavior: 'smooth' });
-            return;
+            hasError = true;
         }
         if (imageURL !== ''){
             try {
                 const imageExists = await checkImageExist(imageURL)
                 if (!imageExists){
                     setIsError(true)
-                    setMessage("Please ensure your input is valid before submitting.")
-                    if (topRef.current) topRef.current.scrollIntoView({ behavior: 'smooth' });
-                    return;
+                    if (hasError) setMessage("Please enter all the required fields and ensure your input is valid before submitting.")
+                    else setMessage("Please ensure your input is valid before submitting.")
+                    hasError = true;
                 }
             } catch (error) {
                 setIsError(true)
-                setMessage("Please ensure your input is valid before submitting.")
-                if (topRef.current) topRef.current.scrollIntoView({ behavior: 'smooth' });
-                return;
+                if (hasError) setMessage("Please enter all the required fields and ensure your input is valid before submitting.")
+                    else setMessage("Please ensure your input is valid before submitting.")
+                hasError = true;
             }
+        }
+        if (hasError) {
+            if (topRef.current) topRef.current.scrollIntoView({ behavior: 'smooth' });
+            return;
         }
         setMessage('')
         setImageErrorMessage('')
@@ -129,8 +133,8 @@ export default function NewArticle({ setActivePage }) {
     if (loading) return <Loader />
     return (
         <section ref={topRef} className="flex flex-col items-center border-t border-highland-500">
-            <h2 className="font-extrabold text-2xl p-4 text-shadow-green-600">Post an article</h2>
-            { message && <div className={`message max-w-3xl ${ isError? "text-mandys-pink-500 text-start" : "text-shadow-green-500 text-center"}`}>
+            <h2 className="title">Post an article</h2>
+            { message && <div className={`message max-w-3xl ${ isError? "text-feedback-error text-start" : "text-feedback-success text-center"}`}>
                 <ul className="flex flex-col p-4 items-start">
                 <li >{message}</li>
                 <li >{titleErrorMessage}</li>
@@ -142,11 +146,11 @@ export default function NewArticle({ setActivePage }) {
                     <button  className="mb-2 p-1">Go to your new article</button>
                 </NavLink>: null}
             </div>}
-            <section className="items-center text-center text-highland-600 font-bold">
+            <section className="items-center text-center text-tertiary font-bold">
                 <div className="flex flex-row items-center">
-                    <label htmlFor="new-article-title" className="text-highland-600 font-bold p-1 m-1">Title: </label>
+                    <label htmlFor="new-article-title" className="text-tertiary font-bold p-1 m-1">Title: </label>
                     <input id="new-article-title" name="new-article-title" type="text" value={title} 
-                    className="p-1 m-1 border-b-1 text-highland-600 w-full font-medium bg-shadow-green-200"
+                    className={`p-1 m-1 border-b-1 text-tertiary w-full font-medium ${ titleErrorMessage ? "error-input": null}`}
                     onChange={(e)=>{
                         setTitle(e.target.value); 
                         setTitleErrorMessage('');
@@ -155,10 +159,10 @@ export default function NewArticle({ setActivePage }) {
                 </div>
                 <div className="flex flex-row items-center justify-center flex-wrap w-full">
                     <div className="flex flex-row items-center my-1 w-full"> 
-                        <label htmlFor="new-article-title" className="text-highland-600 font-bold p-1 m-1 text-nowrap">Topic:</label>
+                        <label htmlFor="new-article-title" className="text-tertiary font-bold p-1 m-1 text-nowrap">Topic:</label>
                         <select name="new-article-topic" id="new-article-topic" value={topic} 
                         onChange={(e)=>{setTopic(e.target.value); setTopicErrorMessage('')}} 
-                            className="text-highland-600 bg-shadow-green-100 m-1 p-1.5 rounded-sm font-semibold">
+                            className="text-tertiary bg-surface m-1 p-1.5 rounded-sm font-semibold">
                             { topics.map((topic)=>{
                                 return <option key={topic.slug} value={topic.slug}>{topic.slug[0].toUpperCase() + topic.slug.slice(1)}</option>
                             })}
@@ -177,10 +181,10 @@ export default function NewArticle({ setActivePage }) {
                     
                 </div>
                 <div className="flex flex-row items-center">
-                    <label htmlFor="new-article_img_url" className="text-highland-600 font-bold p-1 m-1 text-nowrap">Article Image URL: </label>
+                    <label htmlFor="new-article_img_url" className="text-tertiary font-bold p-1 m-1 text-nowrap">Article Image URL: </label>
                     <input id="new-article_img_url" name="new-article_img_url" type="text" value={imageURL} placeholder="(optional)"
-                    className="p-1 m-1 border-b-1 text-highland-600"
-                    onChange={(e)=>{setImageURL(e.target.value)}}></input>
+                    className={`p-1 m-1 border-b-1 text-tertiary ${ imageErrorMessage ? "error-input": null}`}
+                    onChange={(e)=>{setImageURL(e.target.value); setImageErrorMessage('')}}></input>
                 </div>
             </section>
             <textarea value={body} id="new-article-body" name="new-article-body"  rows={10}
@@ -189,7 +193,7 @@ export default function NewArticle({ setActivePage }) {
                 setBodyErrorMessage('');
                 if (title !== '' && body !== '' && topic !== '') setMessage('')
             }}
-            className="resize-y border-2 border-shadow-green-500 rounded-md p-2 m-2 text-shadow-green-800 bg-shadow-green-100/70 w-9/10 max-w-3xl" 
+            className={`resize-y border-2 border-feedback-success rounded-md p-2 m-2 text-shadow-green-800 bg-surface w-9/10 max-w-xl ${ bodyErrorMessage ? "error-input": null}`}
             placeholder="Write your article here...">
             </textarea>
             <button onClick={handleArticleSubmit} disabled={loading}>Submit</button>

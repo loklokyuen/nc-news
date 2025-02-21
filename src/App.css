@@ -59,6 +59,17 @@
   --color-mandys-pink-800: #9b3719;
   --color-mandys-pink-900: #81321b;
   --color-mandys-pink-950: #461709;
+  --color-primary: #386356;             /* shadow green 600 */
+  --color-primary-light: #6b9c8a;       /* shadow green 400 */
+  --color-secondary: #75964c;           /* green kelp 500 */
+  --color-secondary-light: #92b16a;     /* green kelp 400 */
+  --color-tertiary: #356636;            /* highland 600 */
+  --color-tertiary-light: #629460;      /* highland 400 */
+  --color-accent: #e04d22;              /* mandys pink 600 */
+  --color-neutral: #3a4a2a;             /* green kelp 800 */
+  --color-surface: #c1d9ce;             /* shadow green 200 */
+  --color-feedback-error: #f26941;      /* mandys pink 500 */
+  --color-feedback-success: #4b7e6d;    /* shadow green 500 */
 }
 
 #root {
@@ -69,7 +80,23 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: var(--color-shadow-green-200);
+  background-color: var(--color-shadow-green-100);
+}
+
+.title {
+  @apply font-extrabold text-2xl text-primary flex-grow text-center mt-4 m-2
+}
+
+.primary-interactive {
+  @apply font-bold text-primary hover:text-primary-light text-xl
+}
+
+.secondary-interactive {
+  @apply font-semibold text-secondary hover:text-secondary-light text-lg
+}
+
+.tertiary-interactive {
+  @apply font-semibold text-tertiary hover:text-tertiary-light text-lg
 }
 
 
@@ -96,15 +123,15 @@ li{
 }
 
 button {
-  color: var(--color-shadow-green-100);
+  color: var(--color-shadow-green-50);
   font-weight: 700;
   background-color: var(--color-shadow-green-500);
 }
 
 button:hover {
-  background-color: var(--color-shadow-green-100);
+  background-color: var(--color-shadow-green-50);
   color: var(--color-shadow-green-500);
-  border: 2px solid var(--color-shadow-green-400);
+  border: 2px solid var(--color-primary-light);
 }
 
 button:disabled {
@@ -116,31 +143,31 @@ button:disabled {
 
 .pagination {
   font-size: medium;
-  color: var(--color-shadow-green-50);
+  color: white;
   background-color: var(--color-shadow-green-400);
-  border: 2px solid var(--color-shadow-green-100);
+  border: 2px solid var(--color-shadow-green-300);
   font-weight: 700;
 }
 
 .pagination:hover {
   background-color: var(--color-shadow-green-100);
-  color: var(--color-shadow-green-400);
+  color: var(--color-primary-light);
 }
 
 .pagination[aria-disabled="true"] {
-  background-color: var(--color-shadow-green-200);
+  background-color: var(--color-shadow-green-300);
   color: var(--color-gray-200);
   cursor: not-allowed;
 }
 
 .pagination-current {
-  color: var(--color-shadow-green-400);
+  color: var(--color-primary-light);
   background-color: var(--color-shadow-green-100);
 }
 
 .current-page {
   background-color: var(--color-shadow-green-100) !important;
-  color: var(--color-shadow-green-400) !important;
+  color: var(--color-primary-light) !important;
 }
 
 .loader {
@@ -171,5 +198,9 @@ button:disabled {
 }
 
 .message {
-  @apply w-full mt-1 p-1 font-semibold bg-mandys-pink-50/50
+  @apply m-2 p-2 font-semibold bg-mandys-pink-50/50
+}
+
+.error-input {
+  @apply bg-mandys-pink-200/60 rounded-xs border-mandys-pink-600
 }

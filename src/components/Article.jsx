@@ -56,7 +56,7 @@ export default function Article(){
 
     if (loading) return <Loader/>;
     if (isError && !article) return <div className="not-found">{message}</div>
-    if (message) return <section className={`m-2 font-semibold bg-mandys-pink-50/50 p-4 max-w-xl mx-auto ${isError? "text-mandys-pink-500": "text-shadow-green-600"}`}>
+    if (message) return <section className={`m-2 font-semibold bg-mandys-pink-50/50 p-4 max-w-xl mx-auto ${isError? "text-feedback-error": "text-primary"}`}>
         {message}
         <section className="flex flex-row gap-1 m-2 items-center justify-center">
             <NavLink to="/articles/add">
@@ -69,19 +69,19 @@ export default function Article(){
     </section>
 
     return <div className="flex justify-center items-center min-h-screen">
-        <section className="max-w-4xl bg-shadow-green-300 text-green-kelp-800 mt-2 justify-center flex flex-col self-center">
-            <div className="flex flex-row justify-between items-start w-full mt-4 relative">
-            <h3 className="font-extrabold text-2xl pt-0 mt-0 text-shadow-green-600 flex-grow text-center">{article.title}</h3>
+        <section className="max-w-4xl bg-surface text-neutral mt-2 justify-center flex flex-col self-center">
+            <div className="flex flex-row justify-between items-start w-full relative">
+            <h3 className="title">{article.title}</h3>
             { article.author === loggedInUser && 
-                <i className="fa-regular fa-circle-xmark text-mandys-pink-700 fa-xl justify-center absolute top-3 right-4" onClick={deleteArticle}></i>}
+                <i className="fa-regular fa-circle-xmark text-mandys-pink-700 fa-xl justify-center absolute top-7 right-4" onClick={deleteArticle}></i>}
             </div>
             <img src={article.article_img_url} alt="article image" className="p-4 w-80vw"/>
 
             <NavLink to={`/users/${article.author}`}>
-                <h4 className="font-semibold text-green-kelp-600 hover:text-green-kelp-400">{article.author}</h4>
+                <h4 className="secondary-interactive">{article.author}</h4>
             </NavLink>
             <NavLink to={`/articles?topic=${article.topic}`}>
-                <h4 className="font-semibold text-highland-600 hover:text-highland-400">Topic: {article.topic[0].toUpperCase() + article.topic.substring(1)}</h4>
+                <h4 className="tertiary-interactive">Topic: {article.topic[0].toUpperCase() + article.topic.substring(1)}</h4>
             </NavLink>
             <p>Posted on {article.created_at}</p>
             <p className="p-4 pt-2 text-left">{article.body}</p>

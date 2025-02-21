@@ -40,7 +40,7 @@ export default function Topics({ setActivePage }) {
     if (isError) return <div className="not-found">{message}</div>
     
     return <section className="items-center justify-center flex flex-col ">
-            <h2 className="font-extrabold text-2xl pt-4 text-shadow-green-600">Browse by Topic</h2>
+            <h2 className="title mt-4 m-2">Browse by Topic</h2>
             <div className="flex flex-col items-center my-1 w-full"> 
                 <div className="flex flex-col items-center"> 
                     <span className="m-1 font-semibold text-highland-500">Want to start conversation on a new topic?</span>  
