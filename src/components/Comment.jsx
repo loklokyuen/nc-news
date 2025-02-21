@@ -4,6 +4,8 @@ import { deleteCommentById } from "../api";
 import SmallLoader from "./SmallLoader";
 import Voting from "./Voting";
 import { NavLink } from "react-router";
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
+import DeleteConfirmation from "./DeleteConfirmation";
 
 export default function Comment({ comment, onCommentDeleted }) {
     const formattedDate = new Date(comment.created_at).toLocaleString();
@@ -11,8 +13,9 @@ export default function Comment({ comment, onCommentDeleted }) {
     const [message, setMessage] = useState(null)
     const [isError, setIsError] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [confirmDeletion, setConfirmDeletion] = useState(false)
     
-    function deleteComment(){
+    function handleCommentDeleted(){
         setLoading(true)
         setIsError(false)
         setMessage('')
@@ -45,7 +48,13 @@ export default function Comment({ comment, onCommentDeleted }) {
             <div className="flex justify-between items-center">
             <p className="text-neutral text-left">{comment.body}</p>
             { comment.author === loggedInUser && <span className="text-right top-0 m-1">
-                <i className="fa-regular fa-circle-xmark text-mandys-pink-700 fa-lg" onClick={deleteComment}></i></span>}
+                <i className="fa-regular fa-circle-xmark text-mandys-pink-700 fa-lg" onClick={(e)=>{setConfirmDeletion(true)}}></i></span>}
+                <Dialog open={confirmDeletion} onClose={() => setConfirmDeletion(false)} className="fixed inset-0 z-10 flex items-center justify-center rounded-xl ">
+                    <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
+                    <DialogPanel className="relative bg-white rounded-lg shadow-xl max-w-md w-full ">
+                        <DeleteConfirmation setConfirmDeletion={setConfirmDeletion} onItemDeleted={handleCommentDeleted} itemType="comment"/>
+                    </DialogPanel>
+                </Dialog>
             </div>
             <Voting votes={comment.votes} itemType="comment" id={comment.comment_id}></Voting>
             { message && <div className={`message ${ isError? "text-feedback-error" : "text-feedback-success"}`}>{message}</div>}
