@@ -84,7 +84,7 @@
 }
 
 .title {
-  @apply font-extrabold text-2xl text-primary flex-grow text-center mt-4 m-2
+  @apply font-extrabold text-2xl text-primary flex-grow text-center mt-4 mb-2 mx-8
 }
 
 .primary-interactive {
@@ -203,4 +203,10 @@ button:disabled {
 
 .error-input {
   @apply bg-mandys-pink-200/60 rounded-xs border-mandys-pink-600
+}
+
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
