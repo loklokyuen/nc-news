@@ -113,6 +113,41 @@
 
 .article-item {
   @apply text-neutral max-w-sm rounded-md bg-surface border-2 p-2 m-2 border-shadow-green-400 shadow-2xs;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.article-item.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.comment {
+  @apply text-neutral rounded-md bg-bg/50 shadow-2xs mx-auto p-2 m-2;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.comment.loaded {
+  @apply text-neutral rounded-md border-shadow-green-400 shadow-2xs;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.article-item:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease-in-out;
+}
+
+.voting-icon {
+  @apply m-1;
+}
+
+.voting-icon:hover {
+  transform: scale(1.4);
+  transition: transform 0.3s ease-in-out;
 }
 
 li{

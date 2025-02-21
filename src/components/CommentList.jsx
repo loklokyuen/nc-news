@@ -59,7 +59,7 @@ export default function CommentList({ articleId, commentCount }){
     }
 
     return <section ref={commentRef} className="comment-section border-2 p-2 border-primary-light outline-surface/90 outline-solid outline-4 rounded-sm max-w-4xl w-full px-2">
-        <h4 className="font-bold text-green-kelp-600 text-xl p-2 bg-shadow-green-50/80 m-1">Comments</h4>
+        <h4 className="font-bold text-green-kelp-600 text-xl p-2 bg-bg/50 m-1">Comments</h4>
         { isLoading && <Loader/>}
         { message && <div className={`message ${ isError? "text-feedback-error" : "text-feedback-success"}`}>{message}</div>}
         { comments.map((comment)=>{

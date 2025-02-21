@@ -54,11 +54,11 @@ export default function Voting({ votes, itemType, id }) {
     return <div className="flex justify-center items-center w-full flex-wrap flex-col">
         <p className={`${itemType === "comment"? "justify-start": " justify-center"} flex items-center bg-bg/80 rounded-sm p-0.5 w-full`}>
             {currUpvote === 1 ?
-            <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-solid fa-thumbs-up m-1 text-highland-500`} onClick={handleUpvote}></i> : 
-            <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-regular fa-thumbs-up m-1 text-highland-500`}  onClick={handleUpvote}></i>}
+            <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-solid fa-thumbs-up text-highland-500 voting-icon`} onClick={handleUpvote}></i> : 
+            <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-regular fa-thumbs-up text-highland-500 voting-icon`}  onClick={handleUpvote}></i>}
             {currDownvote === 1 ? 
-            <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-solid fa-thumbs-down m-1 text-mandys-pink-700`} onClick={handleDownvote}></i>:
-            <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-regular fa-thumbs-down m-1 text-mandys-pink-700`} onClick={handleDownvote}></i>}
+            <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-solid fa-thumbs-down text-mandys-pink-700 voting-icon`} onClick={handleDownvote}></i>:
+            <i className={`${itemType === "comment"? "fa-lg": "fa-xl"} fa-regular fa-thumbs-down text-mandys-pink-700 voting-icon`} onClick={handleDownvote}></i>}
             <span className={`font-bold ${votes >= 0 ? "text-highland-500":"text-mandys-pink-700"} ${itemType === "comment"? "text-md": "text-lg"} `}>
                 {votes + currUpvote - currDownvote}
             </span>

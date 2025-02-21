@@ -1,9 +1,34 @@
 import { NavLink } from "react-router";
 import Voting from "./Voting";
+import { useEffect, useRef, useState } from "react";
 
 export default function ArticleItem({ article }){
     const formattedDate = new Date(article.created_at).toLocaleString();
-    return <li className="article-item">
+    const [loaded, setLoaded] = useState(false);
+    const articleRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setLoaded(true);
+                        observer.unobserve(entry.target);
+                    } else {
+                        setLoaded(false);
+                    }
+                });
+            }, { threshold: 0.1 }
+        );
+        if (articleRef.current) {
+            observer.observe(articleRef.current);
+        }
+        return () => {
+            if (articleRef.current) {
+                observer.unobserve(articleRef.current);
+            }
+        };
+    }, []);
+    return <li ref={articleRef}  className={`article-item ${loaded ? 'loaded' : ''}`}>
         <NavLink to={"/articles/" + article.article_id}>
             <img src={article.article_img_url} alt="article image" className="w-xl article-item-img p-2 max-h-40 object-cover"/>
             <h2 className="primary-interactive p-1 pt-0">{article.title}</h2>

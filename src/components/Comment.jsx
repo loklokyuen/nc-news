@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UserAccount } from "../contexts/UserAccount";
 import { deleteCommentById } from "../api";
 import SmallLoader from "./SmallLoader";
@@ -14,7 +14,30 @@ export default function Comment({ comment, onCommentDeleted }) {
     const [isError, setIsError] = useState(false)
     const [loading, setLoading] = useState(false)
     const [confirmDeletion, setConfirmDeletion] = useState(false)
+    const commentRef = useRef(null);
+    const [loaded, setLoaded] = useState(false);
     
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setLoaded(true);
+                        observer.unobserve(entry.target);
+                    } else {
+                        setLoaded(false);
+                    }
+                });
+            }, { threshold: 0.1 }
+        );
+        if (commentRef.current) {
+            observer.observe(commentRef.current);
+        }
+        return () => {
+            if (commentRef.current) {
+                observer.unobserve(commentRef.current);
+            }
+        };
+    }, []);
     function handleCommentDeleted(){
         setLoading(true)
         setIsError(false)
@@ -38,7 +61,7 @@ export default function Comment({ comment, onCommentDeleted }) {
             <SmallLoader/>
         </div>
 
-    return  <div className="border-t w-full border-highland-500 mt-1 p-2">
+    return  <div ref={commentRef} className={`border-t w-full border-highland-500 mt-1 p-2 comment ${loaded ? 'loaded' : ''}`}>
             <div className="flex justify-between items-center">
                 <NavLink to={`/users/${comment.author}`}>
                 <span className="secondary-interactive text-left">{comment.author}</span>
