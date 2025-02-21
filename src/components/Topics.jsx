@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Topic from "./Topic";
 import { getTopics } from "../api";
 import Loader from "./Loader";
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import NewTopic from "./NewTopic";
 
 export default function Topics({ setActivePage }) {
