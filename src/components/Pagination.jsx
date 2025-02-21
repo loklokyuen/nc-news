@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export default function Pagination({ currentPage, onPageChanged, totalPages }) {
     const pageNumbers = [];
     const showPagesBefore = 2;
@@ -23,9 +25,29 @@ export default function Pagination({ currentPage, onPageChanged, totalPages }) {
             pageNumbers.push('...');
         }
     }
-
+    useEffect(() => {
+        function handleKeyPress(e){
+            switch (e.key){
+                case 'ArrowLeft':
+                    if (currentPage > 1)
+                        onPageChanged(currentPage-1)
+                    break;
+                case 'ArrowRight':
+                    if (currentPage < totalPages)
+                        onPageChanged(currentPage+1)
+                    break;
+                default:
+                    break;
+            }
+        }
+        window.addEventListener("keydown", handleKeyPress);
+    
+        return () => {
+          window.removeEventListener("keydown", handleKeyPress);
+        };
+      }, []);
     return <nav aria-label="Page navigation" className="mb-2">
-        <p className="text-tertiary-light font-semibold">Page {currentPage} of {totalPages}</p>
+        <p className="text-tertiary font-semibold m-0.5">Page {currentPage} of {totalPages}</p>
         <ul className="flex items-center -space-x-px h-8 text-sm justify-center">
             <li onClick={()=>{ if (currentPage > 1) onPageChanged(currentPage-1)}}>
                 <a href="#" aria-disabled={currentPage === 1 ? "true" : "false"}
