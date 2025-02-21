@@ -31,6 +31,9 @@ export default function ArticleList({ setActivePage }){
             setTotalNumberOfArticles(total_count)
             setLoading(false)
             setNumberOfPages(Math.ceil(total_count/10))
+            if (total_count === '0'){
+                setMessage('No article about this topic yet')
+            }
         })
         .catch((err)=>{
             setLoading(false)
@@ -59,6 +62,7 @@ export default function ArticleList({ setActivePage }){
         </h2>
         <SortFilterBar topic={topic} sort_by={sort_by} order={order} setSearchParams={setSearchParams} ></SortFilterBar>
         <Pagination currentPage={currentPage} onPageChanged={handlePageChange} totalPages={numberOfPages}></Pagination>
+        {!isError && message && <div className="not-found">{message}</div>}
         <ul className="items-center flex flex-col flex-wrap justify-center md:flex-row md:grid-cols-3 md:items-stretch md:gap-x-4">
         { articles.map((article)=>{
             return <ArticleItem key={article.article_id} article={article}></ArticleItem>
