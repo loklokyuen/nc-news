@@ -84,6 +84,7 @@
   background-color: var(--color-bg);
 }
 
+
 .title {
   @apply font-extrabold text-2xl text-primary flex-grow text-center mt-4 mb-2 mx-8
 }

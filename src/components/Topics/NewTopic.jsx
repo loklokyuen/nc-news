@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { postTopic } from "../api";
-import SmallLoader from "./SmallLoader";
+import { postTopic } from "../../api";
+import SmallLoader from "../Common/SmallLoader";
 
 
 export default function NewTopic({ setCreateNewTopic, onTopicCreated }){
@@ -16,6 +16,8 @@ export default function NewTopic({ setCreateNewTopic, onTopicCreated }){
             setErrorMessage("Please enter a slug for the new topic.")
             return;
         }
+        setSuccessMessage('')
+        setErrorMessage('')
         setLoading(true)
         postTopic(slug, description)
         .then(({ insertedTopic })=>{

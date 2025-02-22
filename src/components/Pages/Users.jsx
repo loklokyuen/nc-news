@@ -1,8 +1,8 @@
 import { use, useContext, useEffect, useState } from "react";
-import { UserAccount } from "../contexts/UserAccount";
-import { getUserInfoByUsername } from "../api";
+import { UserAccount } from "../../contexts/UserAccount";
+import { getUserInfoByUsername } from "../../api";
 import { useParams } from "react-router";
-import Loader from "./Loader";
+import Loader from "../Common/Loader";;
 
 export default function Users({ setActivePage}) {
     const [user, setUser] = useState(null);

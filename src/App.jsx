@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import './App.css'
-import ArticleList from './components/ArticleList'
+import ArticleList from './components/Articles/ArticleList'
 import { Route, Routes } from 'react-router'
-import Article from './components/Article'
-import Home from './components/Home'
+import Article from './components/Articles/Article'
+import Home from './components/Pages/Home'
 import { UserAccountProvider } from './contexts/UserAccount'
-import Topics from './components/Topics'
-import Users from './components/Users'
-import NavBar from './components/NavBar'
-import NewArticle from './components/NewArticle'
-import Footer from './components/Footer'
+import Topics from './components/Topics/Topics'
+import Users from './components/Pages/Users'
+import NavBar from './components/Layout/NavBar'
+import NewArticle from './components/Articles/NewArticle'
+import Footer from './components/Layout/Footer'
 
 function App() {
   const [activePage, setActivePage] = useState('')

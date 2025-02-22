@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
-import { postArticleComment } from "../api"
-import { UserAccount } from "../contexts/UserAccount";
-import SmallLoader from "./SmallLoader";
+import { postArticleComment } from "../../api"
+import { UserAccount } from "../../contexts/UserAccount";
+import SmallLoader from "../Common/SmallLoader";
 
 export default function NewComment({ articleId, onCommentPosted}) {
     const [comment, setComment] = useState('')
