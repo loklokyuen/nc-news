@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { UserAccount } from "../contexts/UserAccount";
-import { deleteCommentById } from "../api";
-import SmallLoader from "./SmallLoader";
-import Voting from "./Voting";
+import { UserAccount } from "../../contexts/UserAccount";
+import { deleteCommentById } from "../../api";
+import SmallLoader from "../Common/SmallLoader";
+import Voting from "../Common/Voting";
 import { NavLink } from "react-router";
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
-import DeleteConfirmation from "./DeleteConfirmation";
+import DeleteConfirmation from "../Common/DeleteConfirmation";
 
 export default function Comment({ comment, onCommentDeleted }) {
     const formattedDate = new Date(comment.created_at).toLocaleString();

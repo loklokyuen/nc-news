@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react"
-import Loader from "./Loader"
+import Loader from "../Common/Loader"
 import NewComment from "./NewComment"
-import { getCommentsByArticleId } from "../api"
+import { getCommentsByArticleId } from "../../api"
 import Comment from "./Comment"
-import Pagination from "./Pagination"
+import Pagination from "../Common/Pagination"
 
 export default function CommentList({ articleId, commentCount }){
     const [comments, setComments] = useState([])

@@ -1,9 +1,9 @@
 import { useContext, useEffect, useRef, useState } from "react"
-import { getTopics, postArticle } from "../api"
-import { UserAccount } from "../contexts/UserAccount";
-import Loader from "./Loader";
+import { getTopics, postArticle } from "../../api"
+import { UserAccount } from "../../contexts/UserAccount";
+import Loader from "../Common/Loader";
 import { NavLink } from "react-router";
-import NewTopic from "./NewTopic";
+import NewTopic from "../Topics/NewTopic";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 
 export default function NewArticle({ setActivePage }) {

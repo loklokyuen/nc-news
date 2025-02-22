@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { getArticles, getTopics } from "../api"
-import Loader from "./Loader"
-import ArticleItem from "./ArticleItem"
-import Topic from "./Topic"
+import { getArticles, getTopics } from "../../api"
+import Loader from "../Common/Loader";
+import ArticleItem from "../Articles/ArticleItem"
+import Topic from "../Topics/Topic"
 import { NavLink } from "react-router";
 
 export default function Home({ setActivePage }) {

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { NavLink } from "react-router";
-import { UserAccount } from "../contexts/UserAccount";
+import { UserAccount } from "../../contexts/UserAccount";
 
 export default function NavBar({ activePage }) {
     const { loggedInUser, avatarURL } = useContext(UserAccount);

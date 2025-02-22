@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Topic from "./Topic";
-import { getTopics } from "../api";
-import Loader from "./Loader";
+import { getTopics } from "../../api";
+import Loader from "../Common/Loader";
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import NewTopic from "./NewTopic";
 
@@ -13,15 +13,19 @@ export default function Topics({ setActivePage }) {
     const [createNewTopic, setCreateNewTopic] = useState(false)
 
     useEffect(()=>{
+        console.log('Topics useEffect');
+        
         setLoading(true)
         setActivePage('topics')
         setMessage('')
         getTopics()
         .then(({ topics })=>{
+            console.log('Fetched topics:', topics);
             setTopics(topics)
             setLoading(false)
         })
         .catch((err)=>{
+            console.error('Error fetching topics:', err);
             setIsError(true)
             setLoading(false)
             const errorMessage = err.response?.data?.msg || 'Something went wrong! Unable to fetch topics, please try again later.'
@@ -60,5 +64,4 @@ export default function Topics({ setActivePage }) {
                 })}
             </ul>
         </section>
-    
 }

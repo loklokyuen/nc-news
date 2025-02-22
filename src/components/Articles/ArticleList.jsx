@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getArticles } from "../api";
+import { getArticles } from "../../api";
 import ArticleItem from "./ArticleItem";
 import { NavLink, useSearchParams } from "react-router";
 import SortFilterBar from "./SortFilterBar";
-import Loader from "./Loader";
-import Pagination from "./Pagination";
+import Loader from "../Common/Loader";
+import Pagination from "../Common/Pagination";
 
 export default function ArticleList({ setActivePage }){
     const [articles, setArticles] = useState([])

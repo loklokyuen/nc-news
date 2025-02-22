@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { patchArticleVote, patchCommentVote } from "../api";
+import { patchArticleVote, patchCommentVote } from "../../api";
 
 export default function Voting({ votes, itemType, id }) {
     const [currUpvote, setCurrUpvote] = useState(0)

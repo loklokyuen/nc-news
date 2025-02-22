@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router";
-import { deleteArticleById, getArticleById } from "../api";
-import Loader from "./Loader";
-import Voting from "./Voting";
-import CommentList from "./CommentList";
-import { UserAccount } from "../contexts/UserAccount";
+import { deleteArticleById, getArticleById } from "../../api";
+import Loader from "../Common/Loader";
+import Voting from "../Common/Voting";
+import CommentList from "../Comments/CommentList";
+import { UserAccount } from "../../contexts/UserAccount";
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
-import DeleteConfirmation from "./DeleteConfirmation";
+import DeleteConfirmation from "../Common/DeleteConfirmation";
 
 export default function Article(){
     const { loggedInUser } = useContext(UserAccount);

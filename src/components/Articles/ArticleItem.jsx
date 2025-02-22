@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import Voting from "./Voting";
+import Voting from "../Common/Voting";
 import { useEffect, useRef, useState } from "react";
 
 export default function ArticleItem({ article }){
