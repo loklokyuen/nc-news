@@ -1,27 +1,73 @@
-import { useEffect, useState } from "react"
-import { getTopics } from "../../api"
+import { useEffect, useState, useRef } from "react";
+import { getTopics } from "../../api";
+import DropdownMenu from "../Common/DropdownMenu";
 
-export default function SortFilterBar({ topic, sort_by, order, setSearchParams }) {
-    const [topics, setTopics] = useState([])
+export default function SortFilterBar({ topic, limit, setSearchParams }) {
+    const [topics, setTopics] = useState([]);
+    const [showSortMenu, setShowSortMenu] = useState(false);
+    const [showTopicMenu, setShowTopicMenu] = useState(false);
+    const [showLimitMenu, setShowLimitMenu] = useState(false);
 
-    useEffect(()=>{
+    const [sortOption, setSortOption] = useState("Most Recent");
+    const [topicOption, setTopicOption] = useState("All Topics");
+    const [limitOption, setLimitOption] = useState(limit || "10");
+
+    const sortMenuRef = useRef(null); 
+    const topicMenuRef = useRef(null); 
+    const limitMenuRef = useRef(null); 
+
+    useEffect(() => {
         getTopics()
-        .then(({ topics })=>{
-            setTopics(topics)
-        })
-    }, [])
+            .then(({ topics }) => {
+                const topicOptions = topics.map((topic) => topic.slug);
+                topicOptions.unshift("all");
+                setTopics(topicOptions);
+            });
+    }, []);
+
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if (sortMenuRef.current && !sortMenuRef.current.contains(e.target)) {
+                setShowSortMenu(false);
+            }
+            if (topicMenuRef.current && !topicMenuRef.current.contains(e.target)) {
+                setShowTopicMenu(false);
+            }
+            if (limitMenuRef.current && !limitMenuRef.current.contains(e.target)) {
+                setShowLimitMenu(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    useEffect(() => {
+        if (topic) {
+            setTopicOption(topic[0].toUpperCase() + topic.slice(1));
+        } else {
+            setTopicOption("All Topics");
+        }
+    }, [topic]);
+
+    useEffect(() => {
+        if (limit) {
+            setLimitOption(limit);
+        } else {
+            setLimitOption("10");
+        }
+    }, [limit]);
 
     const updateSearchParams = (key, value) => {
         setSearchParams((prev) => {
-          const newParams = new URLSearchParams(prev);
-          if (value && value !== "all") {
-            newParams.set(key, value);
-          } else {
-            newParams.delete(key);
-          }
-          return newParams;
+            const newParams = new URLSearchParams(prev);
+            if (value && value !== "all") {
+                newParams.set(key, value);
+            } else {
+                newParams.delete(key);
+            }
+            return newParams;
         });
-      };
+    };
 
     function handleSortChange(sort_by, order) {
         setSearchParams((prev) => {
@@ -31,36 +77,99 @@ export default function SortFilterBar({ topic, sort_by, order, setSearchParams }
             return newParams;
         });
     }
-    
-    return <section>
-        <div className="flex sm:flex-col md:flex-row justify-around mt-2 items-stretch flex-wrap">
-            <div className="flex flex-row items-center ">
-                <label htmlFor="sort-by" className="text-tertiary font-bold">Sort By:</label>
-                <select name="sort-by" id="sort-by" value={`${sort_by || ""}|${order || ""}`} onChange={(e)=>{ 
-                    const [newSort, newOrder] = e.target.value.split("|");
-                    handleSortChange(newSort, newOrder);
-                }} 
-                className="text-tertiary bg-surface m-1 p-1.5 rounded-xl font-semibold">
-                    <option value="created_at|desc">Most Recent</option>
-                    <option value="votes|desc">Most Popular</option>
-                    <option value="comment_count|desc">Most Discussed</option>
-                    <option value="created_at|asc">Oldest</option>
-                    <option value="votes|asc">Least Popular</option>
-                    <option value="comment_count|asc">Least Discussed</option>
 
-                </select>
+    const sortOptions = [
+        { label: 'Most Recent', onClick: () => {
+            setSortOption('Most Recent');
+            handleSortChange('created_at', 'desc')
+        }},
+        { label: 'Most Popular', onClick: () =>{
+            setSortOption('Most Popular');
+            handleSortChange('votes', 'desc')
+        }},
+        { label: 'Most Discussed', onClick: () => {
+            setSortOption('Most Discussed');
+            handleSortChange('comment_count', 'desc')
+        }},
+        { label: 'Oldest', onClick: () => {
+            setSortOption('Oldest');
+            handleSortChange('created_at', 'asc') 
+        }},
+        { label: 'Least Popular', onClick: () =>{
+            setSortOption('Least Popular');
+            handleSortChange('votes', 'asc')
+        }},
+        { label: 'Least Discussed', onClick: () => {
+            setSortOption('Least Discussed');
+            handleSortChange('comment_count', 'asc') 
+        }},
+    ];
+
+    const topicOptions = topics.map((topic) => {
+        return { label: topic[0].toUpperCase() + topic.slice(1), 
+            onClick: () => {
+            setShowTopicMenu(false);
+            setTopicOption(topic[0].toUpperCase() + topic.slice(1));
+            updateSearchParams("topic", topic)
+        }}
+    });
+
+    const limitOptions = [
+        { label: '5', onClick: () => {
+            setLimitOption('5');
+            updateSearchParams("limit", '5')
+        }},
+        { label: '10', onClick: () => {
+            setLimitOption('10');
+            updateSearchParams("limit", '10')
+        }},
+        { label: '20', onClick: () => {
+            setLimitOption('20');
+            updateSearchParams("limit", '20')
+        }},
+        { label: '30', onClick: () => {
+            setLimitOption('30');
+            updateSearchParams("limit", '30')
+        }}
+    ];
+
+    return (
+        <section>
+            <div className="flex md:flex-row justify-around mt-2 items-stretch flex-wrap gap-2 lg:mx-36">
+                <div className="flex flex-row items-center m-1">
+                    <label htmlFor="sort-by" className="text-tertiary font-bold">Sort By:</label>
+                    <div className="relative" ref={sortMenuRef}>
+                        <span onClick={() => setShowSortMenu(!showSortMenu)}
+                            className="text-tertiary bg-surface m-1 p-1.5 px-2 rounded-xl font-semibold text-nowrap cursor-pointer">
+                            {sortOption}
+                            <i className="fa-solid fa-caret-down ml-1"></i>
+                        </span>
+                        {showSortMenu && <DropdownMenu options={sortOptions} />}
+                    </div>
+                </div>
+                <div className="flex flex-row items-center m-1">
+                    <label htmlFor="current-topic" className="text-tertiary font-bold">Topic:</label>
+                    <div className="relative" ref={topicMenuRef}>
+                        <span onClick={() => setShowTopicMenu(!showTopicMenu)}
+                            className="text-tertiary bg-surface m-1 p-1.5 px-2 rounded-xl font-semibold text-nowrap cursor-pointer">
+                            {topicOption}
+                            <i className="fa-solid fa-caret-down ml-1"></i>
+                        </span>
+                        {showTopicMenu && <DropdownMenu options={topicOptions} />}
+                    </div>
+                </div>
+                <div className="flex flex-row items-center m-1">
+                    <label htmlFor="limit" className="text-tertiary font-bold">Articles per page:</label>
+                    <div className="relative" ref={limitMenuRef}>
+                        <span onClick={() => setShowLimitMenu(!showLimitMenu)}
+                            className="text-tertiary bg-surface m-1 p-1.5 px-2 rounded-xl font-semibold text-nowrap cursor-pointer">
+                            {limitOption}
+                            <i className="fa-solid fa-caret-down ml-1"></i>
+                        </span>
+                        {showLimitMenu && <DropdownMenu options={limitOptions} />}
+                    </div>
+                </div>
             </div>
-            <div className="flex flex-row items-center">
-                <label htmlFor="current-topic" className="text-tertiary font-bold">Filter By Topic:</label>
-                <select name="current-topic" id="current-topic" value={topic || "all"} 
-                onChange={(e)=>{updateSearchParams("topic", e.target.value)}} 
-                 className="text-tertiary bg-surface m-1 p-1.5 rounded-xl font-semibold">
-                    <option value="all">All</option>
-                    { topics.map((topic)=>{
-                        return <option key={topic.slug} value={topic.slug}>{topic.slug[0].toUpperCase() + topic.slug.slice(1)}</option>
-                    })}
-                </select>
-            </div>
-        </div>
-    </section>
+        </section>
+    );
 }

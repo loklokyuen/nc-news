@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { getArticles, getTopics } from "../../api"
-import Loader from "../Common/Loader";
 import ArticleItem from "../Articles/ArticleItem"
 import Topic from "../Topics/Topic"
 import { NavLink } from "react-router";
+import SmallLoader from "../Common/SmallLoader";
 
 export default function Home({ setActivePage }) {
     const [latestArticles, setLatestArticles] = useState([])
@@ -51,7 +51,7 @@ export default function Home({ setActivePage }) {
             <NavLink to="/articles">
                 <button>View All Articles</button>
             </NavLink>
-            {loadingArticles && <Loader key="articles-loader"/>}
+            {loadingArticles && <SmallLoader key="articles-loader"/>}
             {isError && latestArticles.length === 0&& <div className="not-found">Something went wrong! Unable to fetch articles, please try again later.</div>}
         </section>
         <section className="items-start justify-center flex flex-col">
@@ -64,7 +64,7 @@ export default function Home({ setActivePage }) {
                 <button>View All Topics</button>
             </NavLink>
             </div>
-            {loadingTopics && <Loader key="topics-loader"/>}
+            {loadingTopics && <SmallLoader key="topics-loader"/>}
             {isError && topics.length === 0 && <div className="not-found">Something went wrong! Unable to fetch topics, please try again later.</div>}
         </section>
     </section>
