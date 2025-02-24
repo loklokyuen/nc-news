@@ -13,19 +13,15 @@ export default function Topics({ setActivePage }) {
     const [createNewTopic, setCreateNewTopic] = useState(false)
 
     useEffect(()=>{
-        console.log('Topics useEffect');
-        
         setLoading(true)
         setActivePage('topics')
         setMessage('')
         getTopics()
         .then(({ topics })=>{
-            console.log('Fetched topics:', topics);
             setTopics(topics)
             setLoading(false)
         })
         .catch((err)=>{
-            console.error('Error fetching topics:', err);
             setIsError(true)
             setLoading(false)
             const errorMessage = err.response?.data?.msg || 'Something went wrong! Unable to fetch topics, please try again later.'

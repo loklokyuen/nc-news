@@ -34,7 +34,13 @@ export default function CommentList({ articleId, commentCount }){
             setMessage(errorMessage)
         })
     }, [articleId, currentPage]) 
-    
+
+    useEffect(()=>{
+        if (window.location.hash === '#comments'){
+            commentRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
+    },[])
+
     function handlePageChange(page){
         setCurrentPage(page)
         setTimeout(()=>{
@@ -58,8 +64,8 @@ export default function CommentList({ articleId, commentCount }){
         setTimeout(()=>setMessage(''), 3000)
     }
 
-    return <section ref={commentRef} className="comment-section border-2 p-2 border-primary-light outline-surface/90 outline-solid outline-4 rounded-sm max-w-4xl w-full px-2">
-        <h4 className="font-bold text-green-kelp-600 text-xl p-2 bg-bg/50 m-1">Comments</h4>
+    return <section id="comments" ref={commentRef} className="comment-section border-2 p-2 border-primary-light outline-surface/90 outline-solid outline-4 rounded-sm max-w-4xl w-full px-2">
+        <h4 className="font-bold text-green-kelp-600 text-xl p-2 bg-bg/50 m-1">Comments ({comments.length})</h4>
         { isLoading && <Loader/>}
         { message && <div className={`message ${ isError? "text-feedback-error" : "text-feedback-success"}`}>{message}</div>}
         { comments.map((comment)=>{
