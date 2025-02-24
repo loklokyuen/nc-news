@@ -22,24 +22,33 @@ export default function SortFilterBar({ topic, sort_by, order, setSearchParams }
           return newParams;
         });
       };
+
+    function handleSortChange(sort_by, order) {
+        setSearchParams((prev) => {
+            const newParams = new URLSearchParams(prev);
+            if (sort_by) newParams.set("sort_by", sort_by);
+            if (order) newParams.set("order", order);
+            return newParams;
+        });
+    }
     
     return <section>
         <div className="flex sm:flex-col md:flex-row justify-around mt-2 items-stretch flex-wrap">
             <div className="flex flex-row items-center ">
                 <label htmlFor="sort-by" className="text-tertiary font-bold">Sort By:</label>
-                <select name="sort-by" id="sort-by" value={sort_by || ""} onChange={(e)=>{ updateSearchParams("sort_by", e.target.value)}} 
+                <select name="sort-by" id="sort-by" value={`${sort_by || ""}|${order || ""}`} onChange={(e)=>{ 
+                    const [newSort, newOrder] = e.target.value.split("|");
+                    handleSortChange(newSort, newOrder);
+                }} 
                 className="text-tertiary bg-surface m-1 p-1.5 rounded-xl font-semibold">
-                    <option value="created_at">{ order === 'asc'? "Oldest" : "Newest" }</option>
-                    <option value="votes">{ order === 'asc'? "Least" : "Most" } Popular</option>
-                    <option value="comment_count">Comments</option>
+                    <option value="created_at|desc">Most Recent</option>
+                    <option value="votes|desc">Most Popular</option>
+                    <option value="comment_count|desc">Most Discussed</option>
+                    <option value="created_at|asc">Oldest</option>
+                    <option value="votes|asc">Least Popular</option>
+                    <option value="comment_count|asc">Least Discussed</option>
+
                 </select>
-                <div
-                onClick={() => updateSearchParams("order", order === "asc" ? "desc" : "asc")}
-                className={` p-2 font-semibold flex items-center gap-1 h-6.5 w-6.5 justify-center text-center
-                hover:text-shadow-green-500 hover:bg-shadow-green-50 rounded-xl text-shadow-green-500 bg-surface hover:border-shadow-green-500 hover:border-2`}
-                >
-                {order === "asc" ? <i class="fa-solid fa-sort-up fa-lg"></i> : <i className="fa-solid fa-sort-down fa-lg"></i>}
-                </div>
             </div>
             <div className="flex flex-row items-center">
                 <label htmlFor="current-topic" className="text-tertiary font-bold">Filter By Topic:</label>

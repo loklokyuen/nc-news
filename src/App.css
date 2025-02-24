@@ -86,7 +86,7 @@
 
 
 .title {
-  @apply font-extrabold text-2xl text-primary flex-grow text-center mt-4 mb-2 mx-8
+  @apply font-extrabold text-2xl text-primary flex-grow text-center mt-3 mb-2 mx-8
 }
 
 .primary-interactive {
@@ -113,7 +113,7 @@
 }
 
 .article-item {
-  @apply text-neutral max-w-sm rounded-md bg-surface border-2 p-2 m-2 border-shadow-green-400 shadow-2xs;
+  @apply text-neutral max-w-sm rounded-md bg-surface p-2 m-2 shadow-md;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
@@ -142,12 +142,12 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.voting-icon {
+.action-icon {
   @apply m-1;
 }
 
-.voting-icon:hover {
-  transform: scale(1.4);
+.action-icon:hover {
+  transform: scale(1.2);
   transition: transform 0.3s ease-in-out;
 }
 
