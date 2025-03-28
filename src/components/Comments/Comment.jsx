@@ -5,7 +5,9 @@ import SmallLoader from "../Common/SmallLoader";
 import Voting from "../Common/Voting";
 import { NavLink } from "react-router";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import DeleteConfirmation from "../Common/DeleteConfirmation";
+import FormattedDate from "../Common/FormattedDate";
 import FormattedDate from "../Common/FormattedDate";
 import DropdownMenu from "../Common/DropdownMenu";
 
@@ -17,7 +19,16 @@ export default function Comment({ comment, onCommentDeleted }) {
 	const [loaded, setLoaded] = useState(false);
 	const [confirmDeletion, setConfirmDeletion] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
+	const { loggedInUser } = useContext(UserAccount);
+	const [message, setMessage] = useState(null);
+	const [isError, setIsError] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [loaded, setLoaded] = useState(false);
+	const [confirmDeletion, setConfirmDeletion] = useState(false);
+	const [showMenu, setShowMenu] = useState(false);
 
+	const commentRef = useRef(null);
+	const dropdownRef = useRef(null);
 	const commentRef = useRef(null);
 	const dropdownRef = useRef(null);
 
@@ -44,7 +55,39 @@ export default function Comment({ comment, onCommentDeleted }) {
 			}
 		};
 	}, []);
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						setLoaded(true);
+						observer.unobserve(entry.target);
+					} else {
+						setLoaded(false);
+					}
+				});
+			},
+			{ threshold: 0.1 }
+		);
+		if (commentRef.current) {
+			observer.observe(commentRef.current);
+		}
+		return () => {
+			if (commentRef.current) {
+				observer.unobserve(commentRef.current);
+			}
+		};
+	}, []);
 
+	useEffect(() => {
+		function handleClickOutside(e) {
+			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+				setShowMenu(false);
+			}
+		}
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
 	useEffect(() => {
 		function handleClickOutside(e) {
 			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -93,16 +136,26 @@ export default function Comment({ comment, onCommentDeleted }) {
 		);
 
 	return (
-		<div
-			ref={commentRef}
-			className={`border-t w-full border-highland-500 mt-1 p-2 comment ${loaded ? "loaded" : ""}`}
-		>
-			<div className="flex justify-between items-center">
-				<span>
-					<NavLink to={`/users/${comment.author}`}>
-						<span className="secondary-interactive text-left">
-							{comment.author}
-						</span>
+		<div ref={commentRef} className={`comment ${loaded ? "loaded" : ""}`}>
+			<div className="flex justify-between items-center p-1">
+				<span className="flex  flex-row flex-wrap align-top items-start">
+					<NavLink
+						to={`/users/${comment.author}`}
+						className="flex items-center flex-row"
+					>
+						<img
+							src={comment.avatar_url}
+							alt="avatar"
+							className="rounded-full h-6 w-6 mr-1 hover:shadow-md hover:shadow-mandys-pink-500 hover:transform-3d hover:scale-105"
+						/>
+						<div className="flex flex-col">
+							<span className="secondary-interactive text-left mr-1 text-sm">
+								{comment.name}
+							</span>
+							<span className="text-gray-500 text-xs text-start">
+								@{comment.author}
+							</span>
+						</div>
 					</NavLink>
 					<FormattedDate date={comment.created_at} />
 				</span>
@@ -130,7 +183,7 @@ export default function Comment({ comment, onCommentDeleted }) {
 					/>
 				</DialogPanel>
 			</Dialog>
-			<p className="text-neutral text-left">{comment.body}</p>
+			<p className="text-neutral text-left m-1">{comment.body}</p>
 
 			<Voting
 				votes={comment.votes}
@@ -139,7 +192,9 @@ export default function Comment({ comment, onCommentDeleted }) {
 			></Voting>
 			{message && (
 				<div
-					className={`message ${isError ? "text-feedback-error" : "text-feedback-success"}`}
+					className={`message ${
+						isError ? "text-feedback-error" : "text-feedback-success"
+					}`}
 				>
 					{message}
 				</div>
