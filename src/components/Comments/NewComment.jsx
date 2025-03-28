@@ -53,11 +53,13 @@ export default function NewComment({ articleId, onCommentPosted }) {
 					name="new-comment"
 					onChange={(e) => setComment(e.target.value)}
 					className="resize-y border-2 border-feedback-success rounded-md p-2 m-2 w-full bg-shadow-green-50 text-green-kelp-700"
-					placeholder="Write your comment here..."></textarea>
+					placeholder="Write your comment here..."
+				></textarea>
 				<button
 					onClick={handleCommentSubmit}
 					disabled={loading}
-					className="mr-2">
+					className="mr-2"
+				>
 					<i className="fa-solid fa-paper-plane rounded-full"></i>
 				</button>
 			</section>
@@ -66,7 +68,8 @@ export default function NewComment({ articleId, onCommentPosted }) {
 				<div
 					className={`message ${
 						isError ? "text-feedback-error " : "text-feedback-success"
-					}`}>
+					}`}
+				>
 					{message}
 				</div>
 			)}

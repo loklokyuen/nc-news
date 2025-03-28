@@ -28,8 +28,8 @@ The hosted version of this platform is available [here](https://news-and-discuss
 
 ## Local Development
 
-
 ### Prerequisites
+
 Before development, make sure you have the following installed:
 
 - Node.js (v20.15.1 or higher)

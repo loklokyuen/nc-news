@@ -73,21 +73,24 @@ export default function ArticleList({ setActivePage }) {
 			<SortFilterBar
 				topic={topic}
 				limit={limit}
-				setSearchParams={setSearchParams}></SortFilterBar>
+				setSearchParams={setSearchParams}
+			></SortFilterBar>
 			{!isError && message && <div className="not-found">{message}</div>}
 			<ul className="items-center flex flex-col flex-wrap justify-center md:flex-row md:grid-cols-3 md:items-stretch md:gap-x-4">
 				{articles.map((article) => {
 					return (
 						<ArticleItem
 							key={article.article_id}
-							article={article}></ArticleItem>
+							article={article}
+						></ArticleItem>
 					);
 				})}
 			</ul>
 			<Pagination
 				currentPage={currentPage}
 				onPageChanged={handlePageChange}
-				totalPages={numberOfPages}></Pagination>
+				totalPages={numberOfPages}
+			></Pagination>
 		</div>
 	);
 }

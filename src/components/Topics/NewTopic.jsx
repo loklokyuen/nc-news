@@ -48,7 +48,8 @@ export default function NewTopic({ setCreateNewTopic, onTopicCreated }) {
 			<div className="grid grid-cols-3 w-full">
 				<label
 					htmlFor="new-topic-slug"
-					className="text-tertiary font-bold p-1 m-1">
+					className="text-tertiary font-bold p-1 m-1"
+				>
 					Slug:{" "}
 				</label>
 				<input
@@ -60,13 +61,15 @@ export default function NewTopic({ setCreateNewTopic, onTopicCreated }) {
 					onChange={(e) => {
 						setSlug(e.target.value);
 						setErrorMessage("");
-					}}></input>
+					}}
+				></input>
 			</div>
 
 			<div className="grid grid-cols-3 w-full">
 				<label
 					htmlFor="new-topic-description"
-					className="text-tertiary font-bold p-1 m-1">
+					className="text-tertiary font-bold p-1 m-1"
+				>
 					Description:{" "}
 				</label>
 				<input
@@ -78,7 +81,8 @@ export default function NewTopic({ setCreateNewTopic, onTopicCreated }) {
 					placeholder="(optional)"
 					onChange={(e) => {
 						setDescription(e.target.value);
-					}}></input>
+					}}
+				></input>
 			</div>
 			<div className="mt-4">
 				<button className="mx-1" onClick={() => setCreateNewTopic(false)}>

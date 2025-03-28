@@ -72,7 +72,8 @@ export default function CommentList({ articleId, commentCount }) {
 		<section
 			id="comments"
 			ref={commentRef}
-			className="comment-section border-highland-600/50 max-w-2xl mt-4 bg-shadow-green-300/40 mx-auto w-full self-center rounded-sm shadow-sm shadow-green-kelp-800/60">
+			className="comment-section border-highland-600/50 max-w-2xl mt-4 bg-shadow-green-300/40 mx-auto w-full self-center rounded-sm shadow-sm shadow-green-kelp-800/60"
+		>
 			<section className="bg-mandys-pink-50/70 border-b border-green-kelp-700/70 flex flex-row w-full items-center justify-start m-0 p-0 rounded-t-sm">
 				<h4 className="font-bold text-highland-600 text-xl p-2 ml-2">
 					Comments ({commentCount})
@@ -83,7 +84,8 @@ export default function CommentList({ articleId, commentCount }) {
 				<div
 					className={`message ${
 						isError ? "text-feedback-error" : "text-feedback-success"
-					}`}>
+					}`}
+				>
 					{message}
 				</div>
 			)}
@@ -92,16 +94,19 @@ export default function CommentList({ articleId, commentCount }) {
 					<Comment
 						key={comment.comment_id}
 						comment={comment}
-						onCommentDeleted={handleCommentDeleted}></Comment>
+						onCommentDeleted={handleCommentDeleted}
+					></Comment>
 				);
 			})}
 			<Pagination
 				currentPage={currentPage}
 				totalPages={totalPages}
-				onPageChanged={handlePageChange}></Pagination>
+				onPageChanged={handlePageChange}
+			></Pagination>
 			<NewComment
 				articleId={articleId}
-				onCommentPosted={handleCommentPosted}></NewComment>
+				onCommentPosted={handleCommentPosted}
+			></NewComment>
 		</section>
 	);
 }

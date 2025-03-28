@@ -52,14 +52,16 @@ export default function Topics({ setActivePage }) {
 					<button
 						className="text-nowrap"
 						onClick={handleTopicCreation}
-						disabled={loading}>
+						disabled={loading}
+					>
 						Create a new topic
 					</button>
 				</div>
 				<Dialog
 					open={createNewTopic}
 					onClose={() => setCreateNewTopic(false)}
-					className="fixed inset-0 z-10 flex items-center justify-center rounded-xl ">
+					className="fixed inset-0 z-10 flex items-center justify-center rounded-xl "
+				>
 					<DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
 					<DialogPanel className="relative bg-white rounded-lg shadow-xl max-w-md w-full ">
 						<NewTopic
