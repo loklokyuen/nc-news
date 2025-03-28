@@ -115,7 +115,9 @@
 	@apply text-neutral max-w-sm rounded-md bg-surface p-2 m-2 shadow-md;
 	opacity: 0;
 	transform: translateY(20px);
-	transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+	transition:
+		opacity 0.5s ease-out,
+		transform 0.5s ease-out;
 }
 
 .article-item.loaded {
@@ -127,7 +129,9 @@
 	/* @apply text-neutral rounded-md bg-mandys-pink-50 p-2 m-2 mx-3 max-w-2xl font-sans border-t shadow-md shadow-shadow-green-600; */
 	opacity: 0;
 	transform: translateY(20px);
-	transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+	transition:
+		opacity 0.5s ease-out,
+		transform 0.5s ease-out;
 }
 
 .comment.loaded {

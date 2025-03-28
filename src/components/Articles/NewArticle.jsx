@@ -152,7 +152,8 @@ export default function NewArticle({ setActivePage }) {
 	return (
 		<section
 			ref={topRef}
-			className="flex flex-col items-center border-t border-highland-500">
+			className="flex flex-col items-center border-t border-highland-500"
+		>
 			<h2 className="title">Post an article</h2>
 			{message && (
 				<div
@@ -160,7 +161,8 @@ export default function NewArticle({ setActivePage }) {
 						isError
 							? "text-feedback-error text-start"
 							: "text-feedback-success text-center"
-					}`}>
+					}`}
+				>
 					<ul className="flex flex-col p-4 items-start">
 						<li>{message}</li>
 						<li>{titleErrorMessage}</li>
@@ -179,7 +181,8 @@ export default function NewArticle({ setActivePage }) {
 				<div className="flex flex-row items-center">
 					<label
 						htmlFor="new-article-title"
-						className="text-tertiary font-bold p-1 m-1">
+						className="text-tertiary font-bold p-1 m-1"
+					>
 						Title:{" "}
 					</label>
 					<input
@@ -194,13 +197,15 @@ export default function NewArticle({ setActivePage }) {
 							setTitle(e.target.value);
 							setTitleErrorMessage("");
 							if (title !== "" && body !== "" && topic !== "") setMessage("");
-						}}></input>
+						}}
+					></input>
 				</div>
 				<div className="flex flex-row items-center justify-center flex-wrap w-full">
 					<div className="flex flex-row items-center my-1 w-full">
 						<label
 							htmlFor="new-article-topic"
-							className="text-tertiary font-bold p-1 m-1 text-nowrap">
+							className="text-tertiary font-bold p-1 m-1 text-nowrap"
+						>
 							Topic:
 						</label>
 						<select
@@ -211,7 +216,8 @@ export default function NewArticle({ setActivePage }) {
 								setTopic(e.target.value);
 								setTopicErrorMessage("");
 							}}
-							className="text-tertiary bg-surface m-1 p-1.5 rounded-sm font-semibold">
+							className="text-tertiary bg-surface m-1 p-1.5 rounded-sm font-semibold"
+						>
 							{topics.map((topic) => {
 								return (
 									<option key={topic.slug} value={topic.slug}>
@@ -225,14 +231,16 @@ export default function NewArticle({ setActivePage }) {
 							<button
 								className="text-nowrap"
 								onClick={handleTopicCreation}
-								disabled={loading}>
+								disabled={loading}
+							>
 								Create a new topic
 							</button>
 						</div>
 						<Dialog
 							open={createNewTopic}
 							onClose={() => setCreateNewTopic(false)}
-							className="fixed inset-0 z-10 flex items-center justify-center rounded-xl ">
+							className="fixed inset-0 z-10 flex items-center justify-center rounded-xl "
+						>
 							<DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
 							<DialogPanel className="relative bg-white rounded-lg shadow-xl max-w-md w-full ">
 								<NewTopic
@@ -246,7 +254,8 @@ export default function NewArticle({ setActivePage }) {
 				<div className="flex flex-row items-center">
 					<label
 						htmlFor="new-article_img_url"
-						className="text-tertiary font-bold p-1 m-1 text-nowrap">
+						className="text-tertiary font-bold p-1 m-1 text-nowrap"
+					>
 						Article Image URL:{" "}
 					</label>
 					<input
@@ -261,14 +270,16 @@ export default function NewArticle({ setActivePage }) {
 						onChange={(e) => {
 							setImageURL(e.target.value);
 							setImageErrorMessage("");
-						}}></input>
+						}}
+					></input>
 				</div>
 			</section>
 			<div className="flex flex-col items-center w-full">
 				<label
 					htmlFor="new-article-body"
 					className="text-tertiary font-bold p-1 m-2 text-left max-w-xl"
-					aria-label="article-body"></label>
+					aria-label="article-body"
+				></label>
 				<textarea
 					value={body}
 					id="new-article-body"
@@ -282,7 +293,8 @@ export default function NewArticle({ setActivePage }) {
 					className={`resize-y border-2 border-feedback-success rounded-md p-2 m-2 text-shadow-green-800 bg-surface w-9/10 max-w-xl ${
 						bodyErrorMessage ? "error-input" : null
 					}`}
-					placeholder="Write your article here..."></textarea>
+					placeholder="Write your article here..."
+				></textarea>
 			</div>
 			<button onClick={handleArticleSubmit} disabled={loading}>
 				Submit

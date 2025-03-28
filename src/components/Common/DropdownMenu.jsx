@@ -5,7 +5,8 @@ export default function DropdownMenu({ options }) {
 				<p
 					key={index}
 					className="block text-left px-2 py-1.5 rounded-lg text-tertiary tertiary-interactive hover:bg-gray-100/50 w-full text-nowrap"
-					onClick={option.onClick}>
+					onClick={option.onClick}
+				>
 					{option.label}
 				</p>
 			))}
