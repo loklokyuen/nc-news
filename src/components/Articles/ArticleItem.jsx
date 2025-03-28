@@ -2,11 +2,7 @@ import { NavLink } from "react-router";
 import Voting from "../Common/Voting";
 import { useEffect, useRef, useState } from "react";
 import FormattedDate from "../Common/FormattedDate";
-import FormattedDate from "../Common/FormattedDate";
 
-export default function ArticleItem({ article }) {
-	const [loaded, setLoaded] = useState(false);
-	const articleRef = useRef(null);
 export default function ArticleItem({ article }) {
 	const [loaded, setLoaded] = useState(false);
 	const articleRef = useRef(null);
@@ -37,12 +33,14 @@ export default function ArticleItem({ article }) {
 	return (
 		<li
 			ref={articleRef}
-			className={`article-item ${loaded ? "loaded" : ""} flex flex-col`}>
+			className={`article-item ${loaded ? "loaded" : ""} flex flex-col`}
+		>
 			<section className="flex flex-row items-center">
 				<div className="secondary-interactive ml-2 flex flex-row align-top p-1">
 					<NavLink
 						to={`/users/${article.author}`}
-						className="flex flex-row items-center">
+						className="flex flex-row items-center"
+					>
 						<img
 							src={article.avatar_url}
 							alt="avatar"
@@ -71,7 +69,8 @@ export default function ArticleItem({ article }) {
 			</div>
 			<NavLink
 				to={"/articles/" + article.article_id}
-				className="flex flex-col justify-center flex-grow">
+				className="flex flex-col justify-center flex-grow"
+			>
 				<h2 className="primary-interactive p-1 pt-0">{article.title}</h2>
 			</NavLink>
 			<section className="flex flex-row items-center text-center justify-between bg-bg/50 rounded-md mt-auto w-full px-2">
@@ -79,7 +78,8 @@ export default function ArticleItem({ article }) {
 					<Voting
 						votes={article.votes}
 						itemType="article"
-						id={article.article_id}></Voting>
+						id={article.article_id}
+					></Voting>
 					<span className="ml-1 font-semibold font-stretch-90%">
 						<NavLink to={`/articles/${article.article_id}#comments`}>
 							<i className="fa-regular fa-comments fa-xl text-cyan-800 action-icon"></i>
@@ -91,7 +91,8 @@ export default function ArticleItem({ article }) {
 				</section>
 				<NavLink
 					to={`/articles?topic=${article.topic}`}
-					className=" bg-mandys-pink-500/80 hover:bg-mandys-pink-600/90 rounded-2xl">
+					className=" bg-mandys-pink-500/80 hover:bg-mandys-pink-600/90 rounded-2xl"
+				>
 					<p className="m-1 font-semibold text-white italic hover:text-mandys-pink-100 capitalize px-1">
 						#{article.topic}
 					</p>
@@ -100,4 +101,3 @@ export default function ArticleItem({ article }) {
 		</li>
 	);
 }
-

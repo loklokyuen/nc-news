@@ -6,9 +6,7 @@ import Voting from "../Common/Voting";
 import CommentList from "../Comments/CommentList";
 import { UserAccount } from "../../contexts/UserAccount";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
-import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import DeleteConfirmation from "../Common/DeleteConfirmation";
-import FormattedDate from "../Common/FormattedDate";
 import FormattedDate from "../Common/FormattedDate";
 import DropdownMenu from "../Common/DropdownMenu";
 
@@ -21,17 +19,7 @@ export default function Article() {
 	const [message, setMessage] = useState("");
 	const [confirmDeletion, setConfirmDeletion] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
-export default function Article() {
-	const { loggedInUser } = useContext(UserAccount);
 
-	const [article, setArticle] = useState(null);
-	const [isError, setIsError] = useState(false);
-	const [loading, setLoading] = useState(true);
-	const [message, setMessage] = useState("");
-	const [confirmDeletion, setConfirmDeletion] = useState(false);
-	const [showMenu, setShowMenu] = useState(false);
-
-	const dropdownRef = useRef(null);
 	const dropdownRef = useRef(null);
 
 	useEffect(() => {
@@ -102,7 +90,8 @@ export default function Article() {
 			<section
 				className={`m-2 font-semibold bg-mandys-pink-50/50 p-4 max-w-xl mx-auto ${
 					isError ? "text-feedback-error" : "text-primary"
-				}`}>
+				}`}
+			>
 				{message}
 				<section className="flex flex-row gap-1 m-2 items-center justify-center">
 					<NavLink to="/articles/add">
@@ -133,7 +122,8 @@ export default function Article() {
 						<div className="secondary-interactive flex flex-row align-top p-1 ">
 							<NavLink
 								to={`/users/${article.author}`}
-								className="flex flex-row items-center">
+								className="flex flex-row items-center"
+							>
 								<img
 									src={article.avatar_url}
 									alt="avatar"
@@ -154,7 +144,8 @@ export default function Article() {
 							<div className="relative" ref={dropdownRef}>
 								<i
 									className="fa-solid fa-ellipsis-vertical text-gray-500 fa-xl text-right"
-									onClick={() => setShowMenu(!showMenu)}></i>
+									onClick={() => setShowMenu(!showMenu)}
+								></i>
 								{showMenu && <DropdownMenu options={dropdownOptions} />}
 							</div>
 						)}
@@ -174,7 +165,8 @@ export default function Article() {
 				<Dialog
 					open={confirmDeletion}
 					onClose={() => setConfirmDeletion(false)}
-					className="fixed inset-0 z-10 flex items-center justify-center rounded-xl ">
+					className="fixed inset-0 z-10 flex items-center justify-center rounded-xl "
+				>
 					<DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
 					<DialogPanel className="relative bg-white rounded-lg shadow-xl max-w-md w-full ">
 						<DeleteConfirmation
@@ -190,7 +182,8 @@ export default function Article() {
 						<Voting
 							votes={article.votes}
 							itemType="article"
-							id={articleId}></Voting>
+							id={articleId}
+						></Voting>
 						<div className="flex flex-row items-center ml-2">
 							<i className="fa-regular fa-comments fa-xl text-cyan-800 mr-1"></i>
 							<span className="text-cyan-800 font-bold font-stretch-90% ">
@@ -200,7 +193,8 @@ export default function Article() {
 					</div>
 					<NavLink
 						to={`/articles?topic=${article.topic}`}
-						className="ml-4 items-center px-3 py-1 rounded-full bg-mandys-pink-500/80 hover:bg-mandys-pink-400 shadow-sm">
+						className="ml-4 items-center px-3 py-1 rounded-full bg-mandys-pink-500/80 hover:bg-mandys-pink-400 shadow-sm"
+					>
 						<span className="text-sm font-semibold whitespace-nowrap text-white hover:text-mandys-pink-50 capitalize">
 							#{article.topic}
 						</span>
@@ -209,8 +203,8 @@ export default function Article() {
 			</section>
 			<CommentList
 				articleId={articleId}
-				commentCount={article.comment_count}></CommentList>
+				commentCount={article.comment_count}
+			></CommentList>
 		</div>
 	);
 }
-

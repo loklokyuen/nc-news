@@ -5,9 +5,7 @@ import SmallLoader from "../Common/SmallLoader";
 import Voting from "../Common/Voting";
 import { NavLink } from "react-router";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
-import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import DeleteConfirmation from "../Common/DeleteConfirmation";
-import FormattedDate from "../Common/FormattedDate";
 import FormattedDate from "../Common/FormattedDate";
 import DropdownMenu from "../Common/DropdownMenu";
 
@@ -19,16 +17,7 @@ export default function Comment({ comment, onCommentDeleted }) {
 	const [loaded, setLoaded] = useState(false);
 	const [confirmDeletion, setConfirmDeletion] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
-	const { loggedInUser } = useContext(UserAccount);
-	const [message, setMessage] = useState(null);
-	const [isError, setIsError] = useState(false);
-	const [loading, setLoading] = useState(false);
-	const [loaded, setLoaded] = useState(false);
-	const [confirmDeletion, setConfirmDeletion] = useState(false);
-	const [showMenu, setShowMenu] = useState(false);
 
-	const commentRef = useRef(null);
-	const dropdownRef = useRef(null);
 	const commentRef = useRef(null);
 	const dropdownRef = useRef(null);
 
