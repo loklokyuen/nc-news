@@ -13,7 +13,7 @@ A web platform for reading articles, participating in discussions through commen
 
 ## Usage
 
-The hosted version of this platform is available [here](https://news-and-discussion.netlify.app/articles). This frontend interacts with the [News and Discussion API](https://github.com/loklokyuen/news-website-project) to fetch articles, comments, and voting data.
+The hosted version of this platform is available [here](https://news-and-discussion.netlify.app). This frontend interacts with the [News and Discussion API](https://github.com/loklokyuen/news-website-project) to fetch articles, comments, and voting data.
 
 ## Tech Stack
 
@@ -28,8 +28,8 @@ The hosted version of this platform is available [here](https://news-and-discuss
 
 ## Local Development
 
-### Pre-requisites
 
+### Prerequisites
 Before development, make sure you have the following installed:
 
 - Node.js (v20.15.1 or higher)
