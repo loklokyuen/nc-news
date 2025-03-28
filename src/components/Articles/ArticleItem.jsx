@@ -2,7 +2,11 @@ import { NavLink } from "react-router";
 import Voting from "../Common/Voting";
 import { useEffect, useRef, useState } from "react";
 import FormattedDate from "../Common/FormattedDate";
+import FormattedDate from "../Common/FormattedDate";
 
+export default function ArticleItem({ article }) {
+	const [loaded, setLoaded] = useState(false);
+	const articleRef = useRef(null);
 export default function ArticleItem({ article }) {
 	const [loaded, setLoaded] = useState(false);
 	const articleRef = useRef(null);
@@ -96,3 +100,4 @@ export default function ArticleItem({ article }) {
 		</li>
 	);
 }
+

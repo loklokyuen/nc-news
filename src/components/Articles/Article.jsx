@@ -6,7 +6,9 @@ import Voting from "../Common/Voting";
 import CommentList from "../Comments/CommentList";
 import { UserAccount } from "../../contexts/UserAccount";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import DeleteConfirmation from "../Common/DeleteConfirmation";
+import FormattedDate from "../Common/FormattedDate";
 import FormattedDate from "../Common/FormattedDate";
 import DropdownMenu from "../Common/DropdownMenu";
 
@@ -19,9 +21,28 @@ export default function Article() {
 	const [message, setMessage] = useState("");
 	const [confirmDeletion, setConfirmDeletion] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
+export default function Article() {
+	const { loggedInUser } = useContext(UserAccount);
+
+	const [article, setArticle] = useState(null);
+	const [isError, setIsError] = useState(false);
+	const [loading, setLoading] = useState(true);
+	const [message, setMessage] = useState("");
+	const [confirmDeletion, setConfirmDeletion] = useState(false);
+	const [showMenu, setShowMenu] = useState(false);
 
 	const dropdownRef = useRef(null);
+	const dropdownRef = useRef(null);
 
+	useEffect(() => {
+		function handleClickOutside(e) {
+			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+				setShowMenu(false);
+			}
+		}
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
 	useEffect(() => {
 		function handleClickOutside(e) {
 			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -192,3 +213,4 @@ export default function Article() {
 		</div>
 	);
 }
+

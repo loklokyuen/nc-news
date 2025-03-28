@@ -5,7 +5,9 @@ import SmallLoader from "../Common/SmallLoader";
 import Voting from "../Common/Voting";
 import { NavLink } from "react-router";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import DeleteConfirmation from "../Common/DeleteConfirmation";
+import FormattedDate from "../Common/FormattedDate";
 import FormattedDate from "../Common/FormattedDate";
 import DropdownMenu from "../Common/DropdownMenu";
 
@@ -17,7 +19,16 @@ export default function Comment({ comment, onCommentDeleted }) {
 	const [loaded, setLoaded] = useState(false);
 	const [confirmDeletion, setConfirmDeletion] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
+	const { loggedInUser } = useContext(UserAccount);
+	const [message, setMessage] = useState(null);
+	const [isError, setIsError] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [loaded, setLoaded] = useState(false);
+	const [confirmDeletion, setConfirmDeletion] = useState(false);
+	const [showMenu, setShowMenu] = useState(false);
 
+	const commentRef = useRef(null);
+	const dropdownRef = useRef(null);
 	const commentRef = useRef(null);
 	const dropdownRef = useRef(null);
 
@@ -44,7 +55,39 @@ export default function Comment({ comment, onCommentDeleted }) {
 			}
 		};
 	}, []);
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						setLoaded(true);
+						observer.unobserve(entry.target);
+					} else {
+						setLoaded(false);
+					}
+				});
+			},
+			{ threshold: 0.1 }
+		);
+		if (commentRef.current) {
+			observer.observe(commentRef.current);
+		}
+		return () => {
+			if (commentRef.current) {
+				observer.unobserve(commentRef.current);
+			}
+		};
+	}, []);
 
+	useEffect(() => {
+		function handleClickOutside(e) {
+			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+				setShowMenu(false);
+			}
+		}
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
 	useEffect(() => {
 		function handleClickOutside(e) {
 			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -98,7 +141,8 @@ export default function Comment({ comment, onCommentDeleted }) {
 				<span className="flex  flex-row flex-wrap align-top items-start">
 					<NavLink
 						to={`/users/${comment.author}`}
-						className="flex items-center flex-row">
+						className="flex items-center flex-row"
+					>
 						<img
 							src={comment.avatar_url}
 							alt="avatar"
@@ -119,7 +163,8 @@ export default function Comment({ comment, onCommentDeleted }) {
 					<div className="relative" ref={dropdownRef}>
 						<i
 							className="fa-solid fa-ellipsis-vertical text-gray-500 fa-xl text-right"
-							onClick={() => setShowMenu(!showMenu)}></i>
+							onClick={() => setShowMenu(!showMenu)}
+						></i>
 						{showMenu && <DropdownMenu options={dropdownOptions} />}
 					</div>
 				)}
@@ -127,7 +172,8 @@ export default function Comment({ comment, onCommentDeleted }) {
 			<Dialog
 				open={confirmDeletion}
 				onClose={() => setConfirmDeletion(false)}
-				className="fixed inset-0 z-10 flex items-center justify-center rounded-xl ">
+				className="fixed inset-0 z-10 flex items-center justify-center rounded-xl "
+			>
 				<DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
 				<DialogPanel className="relative bg-white rounded-lg shadow-xl max-w-md w-full ">
 					<DeleteConfirmation
@@ -142,12 +188,14 @@ export default function Comment({ comment, onCommentDeleted }) {
 			<Voting
 				votes={comment.votes}
 				itemType="comment"
-				id={comment.comment_id}></Voting>
+				id={comment.comment_id}
+			></Voting>
 			{message && (
 				<div
 					className={`message ${
 						isError ? "text-feedback-error" : "text-feedback-success"
-					}`}>
+					}`}
+				>
 					{message}
 				</div>
 			)}

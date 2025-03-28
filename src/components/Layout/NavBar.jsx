@@ -8,7 +8,8 @@ export default function NavBar({ activePage }) {
 		<div className="bg-surface max-w-xl mx-auto py-1">
 			<NavLink to="/">
 				<span
-					className={`h-10 text-2xl rounded-xsfont-stretch-80% text-primary font-semibold italic tracking-wide font-serif hover:after:bg-mandys-pink-600 hover:after:w-full hover:after:h-1`}>
+					className={`h-10 text-2xl rounded-xsfont-stretch-80% text-primary font-semibold italic tracking-wide font-serif hover:after:bg-mandys-pink-600 hover:after:w-full hover:after:h-1`}
+				>
 					Next
 					<span className="text-mandys-pink-500 font-extrabold">Core</span> News
 				</span>
@@ -21,7 +22,8 @@ export default function NavBar({ activePage }) {
 							activePage === "articles"
 								? "border-b-mandys-pink-400 border-b-2 text-mandys-pink-500"
 								: "text-tertiary"
-						}`}>
+						}`}
+					>
 						Articles
 					</span>
 				</NavLink>
@@ -31,7 +33,8 @@ export default function NavBar({ activePage }) {
 							activePage === "topics"
 								? "border-b-mandys-pink-400 border-b-2 text-mandys-pink-500"
 								: "text-tertiary"
-						}`}>
+						}`}
+					>
 						Topics
 					</span>
 				</NavLink>
@@ -41,7 +44,8 @@ export default function NavBar({ activePage }) {
 							activePage === "new-article"
 								? "border-b-mandys-pink-400 border-b-2 text-mandys-pink-500"
 								: "text-tertiary"
-						}`}>
+						}`}
+					>
 						New Article
 					</span>
 				</NavLink>

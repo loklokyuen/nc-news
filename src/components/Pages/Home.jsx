@@ -81,7 +81,8 @@ export default function Home({ setActivePage }) {
 						return (
 							<ArticleItem
 								key={article.article_id}
-								article={article}></ArticleItem>
+								article={article}
+							></ArticleItem>
 						);
 					})}
 				</ul>
