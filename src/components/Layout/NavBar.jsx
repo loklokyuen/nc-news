@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 import { UserAccount } from "../../contexts/UserAccount";
 
 export default function NavBar({ activePage }) {
-	const { loggedInUser, avatarURL } = useContext(UserAccount);
+	const { loggedInUser, displayName, avatarURL } = useContext(UserAccount);
 	return (
 		<div className="bg-surface max-w-xl mx-auto py-1">
 			<NavLink to="/">
@@ -53,7 +53,7 @@ export default function NavBar({ activePage }) {
 					<div className="avatar-container">
 						<img
 							src={avatarURL}
-							alt="user avatar"
+							alt={`${displayName || "User"}'s profile picture`}
 							className="h-6 w-6 rounded-4xl ml-2 shadow-md shadow-mandys-pink-500 hover:transform-3d hover:scale-110"
 						/>
 					</div>

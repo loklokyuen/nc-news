@@ -43,7 +43,7 @@ export default function Pagination({ currentPage, onPageChanged, totalPages }) {
 		return () => {
 			window.removeEventListener("keydown", handleKeyPress);
 		};
-	}, []);
+	}, [currentPage, totalPages, onPageChanged]);
 	return (
 		<nav aria-label="Page navigation" className="mb-2">
 			<p className="text-tertiary font-semibold m-0.5">

@@ -177,151 +177,178 @@ export default function NewArticle({ setActivePage }) {
 			<h2 className="title">Post an article</h2>
 			{message && (
 				<div
-					className={`message max-w-3xl ${
+					className={`message w-full max-w-3xl mb-2 rounded-lg ${
 						isError
 							? "text-feedback-error text-start"
 							: "text-feedback-success text-center"
 					}`}
 				>
 					<ul className="flex flex-col p-4 items-start">
-						<li>{message}</li>
-						<li>{titleErrorMessage}</li>
-						<li>{bodyErrorMessage}</li>
-						<li>{imageErrorMessage}</li>
-						<li>{topicErrorMessage}</li>
+						<li className="font-semibold">{message}</li>
+						{titleErrorMessage && <li className="mt-1">{titleErrorMessage}</li>}
+						{bodyErrorMessage && <li className="mt-1">{bodyErrorMessage}</li>}
+						{imageErrorMessage && <li className="mt-1">{imageErrorMessage}</li>}
+						{topicErrorMessage && <li className="mt-1">{topicErrorMessage}</li>}
 					</ul>
 					{newArticleId ? (
-						<NavLink to={`/articles/${newArticleId}`}>
-							<button className="mb-2 p-1">Go to your new article</button>
-						</NavLink>
+						<div className="flex justify-center mb-4">
+							<NavLink to={`/articles/${newArticleId}`}>
+								<button className="py-2 px-4">Go to your new article</button>
+							</NavLink>
+						</div>
 					) : null}
 				</div>
 			)}
-			<section className="items-center text-center text-tertiary font-bold">
-				<div className="flex flex-row items-center">
-					<label
-						htmlFor="new-article-title"
-						className="text-tertiary font-bold p-1 m-1"
-					>
-						Title:{" "}
-					</label>
-					<input
-						id="new-article-title"
-						name="new-article-title"
-						type="text"
-						value={title}
-						className={`p-1 m-1 border-b-1 text-tertiary w-full font-medium ${
-							titleErrorMessage ? "error-input" : null
-						}`}
-						onChange={(e) => {
-							setTitle(e.target.value);
-							setTitleErrorMessage("");
-							if (title !== "" && body !== "" && topic !== "") setMessage("");
-						}}
-					></input>
-				</div>
-				<div className="flex flex-row items-center justify-center flex-wrap w-full">
-					<div className="flex flex-row items-center my-1 w-full">
+			<form className="w-full max-w-xl" onSubmit={handleArticleSubmit}>
+				<section className="items-center text-tertiary font-bold">
+					<div className="flex flex-row">
 						<label
-							htmlFor="new-article-topic"
-							className="text-tertiary font-bold p-1 m-1 text-nowrap"
+							htmlFor="new-article-title"
+							className="text-tertiary font-bold p-1 mr-2 text-left"
 						>
-							Topic:
+							Title:
 						</label>
-						<div className="relative" ref={topicRef}>
-							<span
-								onClick={() => setShowTopics(!showTopics)}
-								className="text-tertiary bg-surface m-1 p-1.5 px-2 rounded-xl font-semibold text-nowrap cursor-pointer"
+						<input
+							id="new-article-title"
+							name="new-article-title"
+							type="text"
+							value={title}
+							className={`p-2 border rounded-md text-tertiary bg-shadow-green-100 w-full font-medium ${
+								titleErrorMessage
+									? "error-input border-red-500"
+									: "border-gray-300"
+							}`}
+							onChange={(e) => {
+								setTitle(e.target.value);
+								setTitleErrorMessage("");
+								if (title !== "" && body !== "" && topic !== "") setMessage("");
+							}}
+						/>
+					</div>
+
+					<div className="flex flex-col w-full">
+						<div className="flex flex-row flex-wrap md:items-center my-2 w-full items-center">
+							<label
+								htmlFor="new-article-topic"
+								className="text-tertiary font-bold p-1 mr-2 text-left"
 							>
-								{topic
-									? topic[0].toUpperCase() + topic.slice(1)
-									: "Select a topic"}
-								<i className="fa-solid fa-caret-down ml-1"></i>
-							</span>
-							{showTopics && <DropdownMenu options={topicOptions} />}
-						</div>
-						<div className="flex flex-row items-center">
-							<span className="m-1">or</span>
+								Topic:
+							</label>
+							<div className="relative w-auto" ref={topicRef}>
+								<span
+									onClick={() => setShowTopics(!showTopics)}
+									className="text-tertiary bg-surface p-2 px-3 rounded-xl font-semibold cursor-pointer flex items-center justify-between w-full  border border-gray-300"
+								>
+									<span className="truncate mr-1">
+										{topic
+											? topic[0].toUpperCase() + topic.slice(1)
+											: "Select a topic"}
+									</span>
+									<i className="fa-solid fa-caret-down"></i>
+								</span>
+								{showTopics && (
+									<div className="absolute z-10 w-full">
+										<DropdownMenu options={topicOptions} />
+									</div>
+								)}
+							</div>
+							<span className="mx-2 hidden md:inline">or</span>
 							<button
-								className="text-nowrap"
+								type="button"
 								onClick={handleTopicCreation}
 								disabled={loading}
+								aria-label="Create a new topic"
+								className="md:hidden"
+							>
+								<i className="fa-solid fa-plus"></i>
+							</button>
+							<button
+								type="button"
+								onClick={handleTopicCreation}
+								disabled={loading}
+								className="hidden md:block"
 							>
 								Create a new topic
 							</button>
 						</div>
-						<Dialog
-							open={createNewTopic}
-							onClose={() => setCreateNewTopic(false)}
-							className="fixed inset-0 z-10 flex items-center justify-center rounded-xl "
-						>
-							<DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
-							<DialogPanel className="relative bg-white rounded-lg shadow-xl max-w-md w-full ">
-								<NewTopic
-									setCreateNewTopic={setCreateNewTopic}
-									onTopicCreated={handleTopicAdded}
-								/>
-							</DialogPanel>
-						</Dialog>
 					</div>
-				</div>
-				<div className="flex flex-row items-center">
+
+					<div className="flex flex-col md:flex-row mb-2">
+						<label
+							htmlFor="new-article_img_url"
+							className="text-tertiary font-bold p-1 mb-2 md:mb-0 md:mr-2 text-left text-nowrap"
+						>
+							Image URL:
+						</label>
+						<input
+							id="new-article_img_url"
+							name="new-article_img_url"
+							type="text"
+							value={imageURL}
+							placeholder="(optional)"
+							className={`p-2 border rounded-md text-tertiary bg-shadow-green-100 w-full ${
+								imageErrorMessage
+									? "error-input border-red-500"
+									: "border-gray-300"
+							}`}
+							onChange={(e) => {
+								setImageURL(e.target.value);
+								setImageErrorMessage("");
+							}}
+						/>
+					</div>
+				</section>
+
+				<div className="flex flex-col items-center w-full mb-4">
 					<label
-						htmlFor="new-article_img_url"
-						className="text-tertiary font-bold p-1 m-1 text-nowrap"
+						htmlFor="new-article-body"
+						className="text-tertiary font-bold w-full p-1 mb-2 text-left"
+						aria-label="article-body"
 					>
-						Article Image URL:{" "}
+						Article Body:
 					</label>
-					<input
-						id="new-article_img_url"
-						name="new-article_img_url"
-						type="text"
-						value={imageURL}
-						placeholder="(optional)"
-						className={`p-1 m-1 border-b-1 text-tertiary ${
-							imageErrorMessage ? "error-input" : null
-						}`}
+					<textarea
+						value={body}
+						id="new-article-body"
+						name="new-article-body"
+						rows={10}
 						onChange={(e) => {
-							setImageURL(e.target.value);
-							setImageErrorMessage("");
+							setBody(e.target.value);
+							setBodyErrorMessage("");
+							if (title !== "" && body !== "" && topic !== "") setMessage("");
 						}}
-					></input>
+						className={`resize-y border rounded-md p-3 w-full bg-shadow-green-100 ${
+							bodyErrorMessage
+								? "error-input border-red-500"
+								: "border-gray-300"
+						}`}
+						placeholder="Write your article here..."
+					></textarea>
 				</div>
-			</section>
-			<div className="flex flex-col items-center w-full">
-				<label
-					htmlFor="new-article-body"
-					className="text-tertiary font-bold p-1 m-2 text-left max-w-xl"
-					aria-label="article-body"
-				></label>
-				<textarea
-					value={body}
-					id="new-article-body"
-					name="new-article-body"
-					rows={10}
-					onChange={(e) => {
-						setBody(e.target.value);
-						setBodyErrorMessage("");
-						if (title !== "" && body !== "" && topic !== "") setMessage("");
-					}}
-					className={`resize-y border-2 border-feedback-success rounded-md p-2 m-2 text-shadow-green-800 bg-surface w-9/10 max-w-xl ${
-						bodyErrorMessage ? "error-input" : null
-					}`}
-					placeholder="Write your article here..."
-				></textarea>
-			</div>
-			<section className="flex flex-row items-center justify-center w-full">
-				<button onClick={handleClearInput} className="cancel">
-					Clear
-				</button>
-				<button
-					onClick={handleArticleSubmit}
-					disabled={loading}
-					className="secondary"
-				>
-					Submit
-				</button>
-			</section>
+
+				<section className="flex flex-row items-center justify-center gap-4 my-6">
+					<button type="button" onClick={handleClearInput} className="cancel">
+						Clear
+					</button>
+					<button type="submit" disabled={loading} className="secondary">
+						Submit
+					</button>
+				</section>
+			</form>
+
+			<Dialog
+				open={createNewTopic}
+				onClose={() => setCreateNewTopic(false)}
+				className="fixed inset-0 z-10 flex items-center justify-center p-2"
+			>
+				<DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
+				<DialogPanel className="relative bg-white rounded-lg shadow-xl max-w-md w-full">
+					<NewTopic
+						setCreateNewTopic={setCreateNewTopic}
+						onTopicCreated={handleTopicAdded}
+					/>
+				</DialogPanel>
+			</Dialog>
 		</section>
 	);
 }

@@ -29,15 +29,16 @@ export default function Home({ setActivePage }) {
 				setLoadingTopics(false);
 			})
 			.catch((err) => {
-				setLoading(false);
+				setLoadingArticles(false);
+				setLoadingTopics(false);
 				setIsError(true);
 			});
 	}, []);
 
 	return (
 		<section className="items-center justify-center flex mt-4 flex-col">
-			<section className="banner items-center h-60 justify-center flex m-auto">
-				<h1 className="font-serif! text-white text-4xl bg-primary/70 rounded-md p-8 font-light italic">
+			<section className="banner items-center h-60 justify-center w-full max-w-screen-sm flex mx-auto overflow-hidden">
+				<h1 className="font-serif text-white text-4xl bg-primary/70 rounded-md p-8 font-light italic">
 					Next
 					<span className="text-mandys-pink-500 font-extrabold">Core</span> News
 				</h1>

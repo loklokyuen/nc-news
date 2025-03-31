@@ -38,7 +38,7 @@ export default function Users({ setActivePage }) {
 		<section>
 			<img
 				src={user.avatar_url}
-				alt={user.username + " avatar"}
+				alt={`${user.name || "User"}'s profile picture`}
 				className="rounded-full h-24 w-24 mx-auto mt-4 hover:shadow-md hover:shadow-mandys-pink-500 hover:transform-3d hover:scale-105"
 			/>
 			<h2 className="title m-2">{user.name}</h2>
