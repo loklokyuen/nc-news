@@ -15,7 +15,7 @@ export default function NavBar({ activePage }) {
 				</span>
 			</NavLink>
 			<br />
-			<nav className="nav-bar flex flex-row items-center justify-center divide-x-3 divide-asparagus-500">
+			<nav className="nav-bar flex flex-row items-center justify-center divide-x-3 divide-highland-400">
 				<NavLink to="/articles">
 					<span
 						className={`h-8 m-1 tertiary-interactive  ${

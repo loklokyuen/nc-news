@@ -193,7 +193,7 @@ export default function Article() {
 					</div>
 					<NavLink
 						to={`/articles?topic=${article.topic}`}
-						className="ml-4 items-center px-3 py-1 rounded-full bg-mandys-pink-500/80 hover:bg-mandys-pink-400 shadow-sm"
+						className="ml-4 items-center px-3 py-1 bg-mandys-pink-500/90 hover:bg-mandys-pink-600/90 rounded-full"
 					>
 						<span className="text-sm font-semibold whitespace-nowrap text-white hover:text-mandys-pink-50 capitalize">
 							#{article.topic}

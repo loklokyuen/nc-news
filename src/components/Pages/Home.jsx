@@ -37,7 +37,7 @@ export default function Home({ setActivePage }) {
 	return (
 		<section className="items-center justify-center flex mt-4 flex-col">
 			<section className="banner items-center h-60 justify-center flex m-auto">
-				<h1 className="font-serif text-white text-4xl bg-primary/70 rounded-md p-8 font-stretch-80% font-light italic">
+				<h1 className="font-serif! text-white text-4xl bg-primary/70 rounded-md p-8 font-light italic">
 					Next
 					<span className="text-mandys-pink-500 font-extrabold">Core</span> News
 				</h1>
@@ -86,10 +86,15 @@ export default function Home({ setActivePage }) {
 						);
 					})}
 				</ul>
-				<NavLink to="/articles">
-					<button>View All Articles</button>
-				</NavLink>
 				{loadingArticles && <SmallLoader key="articles-loader" />}
+				<section className="flex flex-row items-center justify-center w-full">
+					<NavLink to="/articles">
+						<button>View All Articles</button>
+					</NavLink>
+					<NavLink to="/articles?sort_by=created_at&order=desc">
+						<button className="secondary">View Latest Articles</button>
+					</NavLink>
+				</section>
 				{isError && latestArticles.length === 0 && (
 					<div className="not-found">
 						Something went wrong! Unable to fetch articles, please try again
@@ -104,18 +109,26 @@ export default function Home({ setActivePage }) {
 				{topics.map((topic) => {
 					return <Topic key={topic.slug} topic={topic}></Topic>;
 				})}
-				<div className="items-center w-full m-2 p-1">
+				{loadingTopics && <SmallLoader key="topics-loader" />}
+				<div className="items-center w-full mx-auto p-1">
 					<NavLink to="/topics">
 						<button>View All Topics</button>
 					</NavLink>
 				</div>
-				{loadingTopics && <SmallLoader key="topics-loader" />}
 				{isError && topics.length === 0 && (
 					<div className="not-found">
 						Something went wrong! Unable to fetch topics, please try again
 						later.
 					</div>
 				)}
+			</section>
+			<section className="items-center justify-center flex flex-col">
+				<h2 className="font-bold text-2xl p-4 text-primary italic">
+					Start a conversation by posting your thoughts
+				</h2>
+				<NavLink to="/articles/add">
+					<button className="secondary">Post an Article</button>
+				</NavLink>
 			</section>
 		</section>
 	);

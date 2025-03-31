@@ -91,9 +91,9 @@ export default function ArticleItem({ article }) {
 				</section>
 				<NavLink
 					to={`/articles?topic=${article.topic}`}
-					className=" bg-mandys-pink-500/80 hover:bg-mandys-pink-600/90 rounded-2xl"
+					className=" bg-mandys-pink-500/90 hover:bg-mandys-pink-600/90 rounded-full"
 				>
-					<p className="m-1 font-semibold text-white italic hover:text-mandys-pink-100 capitalize px-1">
+					<p className="m-1 font-semibold text-white italic hover:text-mandys-pink-50 capitalize px-1">
 						#{article.topic}
 					</p>
 				</NavLink>
