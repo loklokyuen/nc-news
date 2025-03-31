@@ -218,14 +218,14 @@ button.alert:hover {
 .pagination {
 	font-size: medium;
 	color: white;
-	background-color: var(--color-primary-light);
+	background-color: var(--color-shadow-green-400);
 	border: 3px solid var(--color-shadow-green-200);
 	font-weight: 700;
 }
 
 .pagination:hover {
 	background-color: var(--color-shadow-green-50);
-	color: var(--color-primary-light);
+	color: var(--color-shadow-green-400);
 }
 
 .pagination[aria-disabled="true"] {
