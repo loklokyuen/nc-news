@@ -165,7 +165,7 @@ export default function Article() {
 				<Dialog
 					open={confirmDeletion}
 					onClose={() => setConfirmDeletion(false)}
-					className="fixed inset-0 z-10 flex items-center justify-center rounded-xl "
+					className="fixed inset-0 z-10 flex items-center justify-center p-4"
 				>
 					<DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
 					<DialogPanel className="relative bg-white rounded-lg shadow-xl max-w-md w-full ">

@@ -164,6 +164,7 @@ button {
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	border: 2px solid var(--color-shadow-green-400);
 	margin: 0.5rem;
+	text-wrap: nowrap;
 }
 
 button:hover {

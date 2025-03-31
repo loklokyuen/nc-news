@@ -87,12 +87,9 @@ export default function Home({ setActivePage }) {
 					})}
 				</ul>
 				{loadingArticles && <SmallLoader key="articles-loader" />}
-				<section className="flex flex-row items-center justify-center w-full">
+				<section className="items-center w-full mx-auto p-1">
 					<NavLink to="/articles">
 						<button>View All Articles</button>
-					</NavLink>
-					<NavLink to="/articles?sort_by=created_at&order=desc">
-						<button className="secondary">View Latest Articles</button>
 					</NavLink>
 				</section>
 				{isError && latestArticles.length === 0 && (
