@@ -85,10 +85,14 @@ export default function NewTopic({ setCreateNewTopic, onTopicCreated }) {
 				></input>
 			</div>
 			<div className="mt-4">
-				<button className="mx-1" onClick={() => setCreateNewTopic(false)}>
+				<button className="cancel" onClick={() => setCreateNewTopic(false)}>
 					Cancel
 				</button>
-				<button onClick={handleTopicSubmit} disabled={loading}>
+				<button
+					className="secondary"
+					onClick={handleTopicSubmit}
+					disabled={loading}
+				>
 					Submit
 				</button>
 			</div>

@@ -10,10 +10,12 @@ import {
 	DialogPanel,
 	DialogTitle,
 } from "@headlessui/react";
+import DropdownMenu from "../Common/DropdownMenu";
 
 export default function NewArticle({ setActivePage }) {
 	const { loggedInUser } = useContext(UserAccount);
 	const topRef = useRef(null);
+	const topicRef = useRef(null);
 
 	const [title, setTitle] = useState("");
 	const [topic, setTopic] = useState("");
@@ -29,6 +31,7 @@ export default function NewArticle({ setActivePage }) {
 	const [imageErrorMessage, setImageErrorMessage] = useState("");
 	const [newArticleId, setNewArticleId] = useState(null);
 	const [createNewTopic, setCreateNewTopic] = useState(false);
+	const [showTopics, setShowTopics] = useState(false);
 
 	useEffect(() => {
 		setActivePage("new-article");
@@ -39,7 +42,6 @@ export default function NewArticle({ setActivePage }) {
 			.then(({ topics }) => {
 				setTopics(topics);
 				setLoading(false);
-				if (topics.length > 0) setTopic(topics[0].slug);
 			})
 			.catch((err) => {
 				setIsError(true);
@@ -78,6 +80,15 @@ export default function NewArticle({ setActivePage }) {
 
 	function handleTopicCreation() {
 		setCreateNewTopic(true);
+	}
+
+	function handleClearInput() {
+		setTitle("");
+		setBody("");
+		setImageURL("");
+		setTopic("");
+		setMessage("");
+		setIsError(false);
 	}
 
 	async function handleArticleSubmit(e) {
@@ -148,6 +159,15 @@ export default function NewArticle({ setActivePage }) {
 			});
 	}
 
+	const topicOptions = topics.map((topicItem) => ({
+		label: topicItem.slug[0].toUpperCase() + topicItem.slug.slice(1),
+		onClick: () => {
+			setTopic(topicItem.slug);
+			setShowTopics(false);
+			setTopicErrorMessage("");
+		},
+	}));
+
 	if (loading) return <Loader />;
 	return (
 		<section
@@ -208,24 +228,18 @@ export default function NewArticle({ setActivePage }) {
 						>
 							Topic:
 						</label>
-						<select
-							name="new-article-topic"
-							id="new-article-topic"
-							value={topic}
-							onChange={(e) => {
-								setTopic(e.target.value);
-								setTopicErrorMessage("");
-							}}
-							className="text-tertiary bg-surface m-1 p-1.5 rounded-sm font-semibold"
-						>
-							{topics.map((topic) => {
-								return (
-									<option key={topic.slug} value={topic.slug}>
-										{topic.slug[0].toUpperCase() + topic.slug.slice(1)}
-									</option>
-								);
-							})}
-						</select>
+						<div className="relative" ref={topicRef}>
+							<span
+								onClick={() => setShowTopics(!showTopics)}
+								className="text-tertiary bg-surface m-1 p-1.5 px-2 rounded-xl font-semibold text-nowrap cursor-pointer"
+							>
+								{topic
+									? topic[0].toUpperCase() + topic.slice(1)
+									: "Select a topic"}
+								<i className="fa-solid fa-caret-down ml-1"></i>
+							</span>
+							{showTopics && <DropdownMenu options={topicOptions} />}
+						</div>
 						<div className="flex flex-row items-center">
 							<span className="m-1">or</span>
 							<button
@@ -296,9 +310,18 @@ export default function NewArticle({ setActivePage }) {
 					placeholder="Write your article here..."
 				></textarea>
 			</div>
-			<button onClick={handleArticleSubmit} disabled={loading}>
-				Submit
-			</button>
+			<section className="flex flex-row items-center justify-center w-full">
+				<button onClick={handleClearInput} className="cancel">
+					Clear
+				</button>
+				<button
+					onClick={handleArticleSubmit}
+					disabled={loading}
+					className="secondary"
+				>
+					Submit
+				</button>
+			</section>
 		</section>
 	);
 }

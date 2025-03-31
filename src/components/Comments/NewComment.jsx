@@ -9,7 +9,7 @@ export default function NewComment({ articleId, onCommentPosted }) {
 	const [message, setMessage] = useState(null);
 	const [loading, setLoading] = useState(false);
 
-	const { loggedInUser } = useContext(UserAccount);
+	const { loggedInUser, displayName, avatarURL } = useContext(UserAccount);
 
 	function handleCommentSubmit(e) {
 		e.preventDefault();
@@ -32,6 +32,8 @@ export default function NewComment({ articleId, onCommentPosted }) {
 			.then(({ insertedComment }) => {
 				setLoading(false);
 				setComment("");
+				insertedComment.avatar_url = avatarURL;
+				insertedComment.name = displayName;
 				onCommentPosted(insertedComment);
 			})
 			.catch((err) => {
@@ -46,22 +48,19 @@ export default function NewComment({ articleId, onCommentPosted }) {
 	}
 	return (
 		<>
-			<section className="flex flex-row items-center border-t border-highland-500">
+			<section className="flex flex-row items-center border-t border-highland-500 bg-shadow-green-300/50">
 				<textarea
 					value={comment}
 					id="new-comment"
 					name="new-comment"
 					onChange={(e) => setComment(e.target.value)}
-					className="resize-y border-2 border-feedback-success rounded-md p-2 m-2 w-full bg-shadow-green-50 text-green-kelp-700"
+					className="resize-y border-2 border-feedback-success rounded-md p-2 m-2 w-full bg-shadow-green-100 text-green-kelp-700"
 					placeholder="Write your comment here..."
 				></textarea>
-				<button
+				<i
+					className="fa-solid fa-paper-plane rounded-full bg-mandys-pink-500 p-2 mr-2 text-white hover:bg-mandys-pink-600 cursor-pointer"
 					onClick={handleCommentSubmit}
-					disabled={loading}
-					className="mr-2"
-				>
-					<i className="fa-solid fa-paper-plane rounded-full"></i>
-				</button>
+				></i>
 			</section>
 			{loading && <SmallLoader />}
 			{message && (

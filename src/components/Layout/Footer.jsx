@@ -7,14 +7,14 @@ export default function Footer() {
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-				<i className="fab fa-github fa-xl text-primary-light m-0.5 hover:text-primary"></i>
+				<i className="fab fa-github fa-xl text-shadow-green-400 m-0.5 hover:text-mandys-pink-500"></i>
 			</a>
 			<a
 				href="https://www.linkedin.com/in/melody-yuen-ll/"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-				<i className="fab fa-linkedin fa-xl text-primary-light m-0.5 hover:text-primary"></i>
+				<i className="fab fa-linkedin fa-xl text-shadow-green-400 m-0.5 hover:text-mandys-pink-500"></i>
 			</a>
 		</footer>
 	);

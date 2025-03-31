@@ -2,7 +2,6 @@
 
 @theme {
 	--spacing: 6px;
-	--color-asparagus-500: #629460;
 	--color-green-kelp-50: #f4f7ee;
 	--color-green-kelp-100: #e6edda;
 	--color-green-kelp-200: #cfdeb8;
@@ -61,7 +60,7 @@
 	--color-mandys-pink-950: #461709;
 
 	--color-primary: #386356; /* shadow green 600 */
-	--color-primary-light: #6b9c8a; /* shadow green 400 */
+	--color-primary-light: #629460; /* highland 400 */
 	--color-secondary: #2c5046; /* green kelp 700 */
 	--color-secondary-light: #92b16a; /* green kelp 400 */
 	--color-tertiary: #356636; /* highland 600 */
@@ -98,7 +97,7 @@
 }
 
 .tertiary-interactive {
-	@apply font-semibold  hover:text-mandys-pink-500 text-lg;
+	@apply font-semibold hover:text-mandys-pink-500 text-lg;
 }
 
 .banner {
@@ -135,7 +134,7 @@
 }
 
 .comment.loaded {
-	@apply text-neutral rounded-md bg-mandys-pink-50/50 p-2 m-2 mx-3 max-w-2xl font-sans  shadow-sm shadow-shadow-green-600;
+	@apply text-neutral rounded-md bg-green-kelp-50/80 p-2 m-2 mx-3 max-w-2xl font-sans shadow-sm shadow-shadow-green-600;
 	opacity: 1;
 	transform: translateY(0);
 }
@@ -161,14 +160,15 @@ li {
 button {
 	color: white;
 	font-weight: 700;
-	background-color: var(--color-shadow-green-500);
+	background-color: var(--color-shadow-green-400);
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border: 2px solid var(--color-shadow-green-400);
 	margin: 0.5rem;
 }
 
 button:hover {
 	background-color: white;
-	color: var(--color-shadow-green-500);
+	color: var(--color-shadow-green-400);
 	border: 2px solid var(--color-primary-light);
 }
 
@@ -182,12 +182,37 @@ button.secondary {
 	color: white;
 	font-weight: 700;
 	background-color: var(--color-mandys-pink-500);
+	border: 2px solid var(--color-mandys-pink-500);
 }
 
 button.secondary:hover {
 	background-color: var(--color-mandys-pink-50);
 	color: var(--color-mandys-pink-500);
 	border: 2px solid var(--color-mandys-pink-500);
+}
+
+button.cancel {
+	color: var(--color-shadow-green-400);
+	font-weight: 700;
+	border: 2px solid var(--color-shadow-green-300);
+	background-color: white;
+}
+
+button.cancel:hover {
+	background-color: var(--color-shadow-green-300);
+	color: white;
+	border: 2px solid var(--color-shadow-green-300);
+}
+button.alert {
+	color: white;
+	font-weight: 700;
+	border-color: var(--color-roman-600);
+	background-color: var(--color-roman-600);
+}
+button.alert:hover {
+	background-color: var(--color-roman-50);
+	color: var(--color-roman-600);
+	border: 2px solid var(--color-roman-600);
 }
 
 .pagination {

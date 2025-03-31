@@ -44,39 +44,7 @@ export default function Comment({ comment, onCommentDeleted }) {
 			}
 		};
 	}, []);
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setLoaded(true);
-						observer.unobserve(entry.target);
-					} else {
-						setLoaded(false);
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
-		if (commentRef.current) {
-			observer.observe(commentRef.current);
-		}
-		return () => {
-			if (commentRef.current) {
-				observer.unobserve(commentRef.current);
-			}
-		};
-	}, []);
 
-	useEffect(() => {
-		function handleClickOutside(e) {
-			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-				setShowMenu(false);
-			}
-		}
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => document.removeEventListener("mousedown", handleClickOutside);
-	}, []);
 	useEffect(() => {
 		function handleClickOutside(e) {
 			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
