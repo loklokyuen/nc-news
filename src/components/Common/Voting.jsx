@@ -56,11 +56,13 @@ export default function Voting({ votes, itemType, id }) {
 					<i
 						className={`${itemType === "comment" ? "fa-lg" : "fa-xl"} fa-solid fa-circle-up text-highland-500 action-icon`}
 						onClick={handleUpvote}
+						aria-label="Upvote this article"
 					></i>
 				) : (
 					<i
 						className={`${itemType === "comment" ? "fa-lg" : "fa-xl"} fa-regular fa-circle-up text-highland-500 action-icon`}
 						onClick={handleUpvote}
+						aria-label="Upvote this article"
 					></i>
 				)}
 				<span
@@ -72,11 +74,13 @@ export default function Voting({ votes, itemType, id }) {
 					<i
 						className={`${itemType === "comment" ? "fa-lg" : "fa-xl"} fa-solid fa-circle-down text-mandys-pink-700 action-icon`}
 						onClick={handleDownvote}
+						aria-label="Downvote this article"
 					></i>
 				) : (
 					<i
 						className={`${itemType === "comment" ? "fa-lg" : "fa-xl"} fa-regular fa-circle-down text-mandys-pink-700 action-icon`}
 						onClick={handleDownvote}
+						aria-label="Downvote this article"
 					></i>
 				)}
 			</span>
