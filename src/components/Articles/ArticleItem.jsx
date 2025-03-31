@@ -43,7 +43,7 @@ export default function ArticleItem({ article }) {
 					>
 						<img
 							src={article.avatar_url}
-							alt="avatar"
+							alt={`${article.name || "User"}'s profile picture`}
 							className="rounded-full h-6 w-6 mr-1 hover:shadow-md hover:shadow-mandys-pink-500 hover:transform-3d hover:scale-105"
 						/>
 						<div className="flex flex-col">
