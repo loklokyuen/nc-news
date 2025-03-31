@@ -67,10 +67,10 @@
 	--color-tertiary-light: #629460; /* highland 400 */
 	--color-accent: #e04d22; /* mandys pink 600 */
 	--color-neutral: #3a4a2a; /* green kelp 800 */
-	--color-surface: #c1d9ce; /* shadow green 200 */
+	--color-surface: #dfece5; /* shadow green 200 */
 	--color-feedback-error: #f26941; /* mandys pink 500 */
 	--color-feedback-success: #4b7e6d; /* shadow green 500 */
-	--color-bg: #dfece5;
+	--color-bg: #f2f7f5;
 }
 
 #root {
