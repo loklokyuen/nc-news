@@ -8,7 +8,7 @@ export default function NavBar({ activePage }) {
 		<div className="bg-surface max-w-xl mx-auto py-1">
 			<NavLink to="/">
 				<span
-					className={`h-10 text-2xl rounded-xsfont-stretch-80% text-primary font-semibold italic tracking-wide font-serif hover:after:bg-mandys-pink-600 hover:after:w-full hover:after:h-1`}
+					className={`h-10 text-2xl rounded-xs font-stretch-80% text-primary font-semibold italic tracking-wide font-serif hover:after:bg-mandys-pink-600 hover:after:w-full hover:after:h-1`}
 				>
 					Next
 					<span className="text-mandys-pink-500 font-extrabold">Core</span> News
