@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { getTopics } from "../../api";
 import DropdownMenu from "../Common/DropdownMenu";
+import { useSearchParams } from "react-router";
 
 export default function SortFilterBar({ topic, limit, setSearchParams }) {
 	const [topics, setTopics] = useState([]);
@@ -8,7 +9,17 @@ export default function SortFilterBar({ topic, limit, setSearchParams }) {
 	const [showTopicMenu, setShowTopicMenu] = useState(false);
 	const [showLimitMenu, setShowLimitMenu] = useState(false);
 
-	const [sortOption, setSortOption] = useState("Most Recent");
+	const [searchParams] = useSearchParams();
+
+	const sortOption = useMemo(() => {
+		const sort_by = searchParams.get("sort_by") || "created_at";
+		const order = searchParams.get("order") || "desc";
+		if (sort_by === "votes" && order === "desc") return "Most Popular";
+		if (sort_by === "comment_count" && order === "desc")
+			return "Most Discussed";
+		if (sort_by === "created_at" && order === "asc") return "Oldest";
+		return "Most Recent";
+	}, [searchParams]);
 	const [topicOption, setTopicOption] = useState("All Topics");
 	const [limitOption, setLimitOption] = useState(limit || "10");
 
@@ -81,43 +92,29 @@ export default function SortFilterBar({ topic, limit, setSearchParams }) {
 		{
 			label: "Most Recent",
 			onClick: () => {
-				setSortOption("Most Recent");
+				setShowSortMenu(false);
 				handleSortChange("created_at", "desc");
 			},
 		},
 		{
 			label: "Most Popular",
 			onClick: () => {
-				setSortOption("Most Popular");
+				setShowSortMenu(false);
 				handleSortChange("votes", "desc");
 			},
 		},
 		{
 			label: "Most Discussed",
 			onClick: () => {
-				setSortOption("Most Discussed");
+				setShowSortMenu(false);
 				handleSortChange("comment_count", "desc");
 			},
 		},
 		{
 			label: "Oldest",
 			onClick: () => {
-				setSortOption("Oldest");
+				setShowSortMenu(false);
 				handleSortChange("created_at", "asc");
-			},
-		},
-		{
-			label: "Least Popular",
-			onClick: () => {
-				setSortOption("Least Popular");
-				handleSortChange("votes", "asc");
-			},
-		},
-		{
-			label: "Least Discussed",
-			onClick: () => {
-				setSortOption("Least Discussed");
-				handleSortChange("comment_count", "asc");
 			},
 		},
 	];
