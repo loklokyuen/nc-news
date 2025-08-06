@@ -19,7 +19,7 @@ The hosted version of this platform is available [here](https://news-and-discuss
 
 ### Frontend Technologies
 
-- **Framework**: React (v19)
+- **Framework**: React (v18.3)
 - **Build Tool**: Vite (v6)
 - **Routing**: React Router (v7)
 - **Styling**: CSS, Tailwind CSS (v4)
