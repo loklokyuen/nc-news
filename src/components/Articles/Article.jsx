@@ -31,15 +31,6 @@ export default function Article() {
 		document.addEventListener("mousedown", handleClickOutside);
 		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, []);
-	useEffect(() => {
-		function handleClickOutside(e) {
-			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-				setShowMenu(false);
-			}
-		}
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => document.removeEventListener("mousedown", handleClickOutside);
-	}, []);
 
 	const params = useParams();
 	const articleId = params.article_id;
