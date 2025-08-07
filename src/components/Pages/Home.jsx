@@ -70,7 +70,7 @@ export default function Home({ setActivePage }) {
 				</p>
 				<p className="text-green-kelp-700 max-w-2xl">
 					Stay informed, share your insights, and explore a world of knowledge
-					and perspectives—all in one place.
+					and perspectives.
 				</p>
 			</section>
 			<section className="items-center justify-center flex flex-col">
