@@ -5,7 +5,7 @@ A web platform for reading articles, participating in discussions through commen
 ## Quick Links
 - **Backend Repository**: [GitHub Repo](https://github.com/loklokyuen/news-website-project) 
 - **Hosted API**: [Live Demo](https://news-and-discussion-platform.onrender.com/api)
-- **Frontend Repository(this repo)**: [GitHub Repo](https://github.com/loklokyuen/nc-news)
+- **Frontend Repository (this repo)**: [GitHub Repo](https://github.com/loklokyuen/nc-news)
 - **Frontend Web App**: [Browse Articles](https://nextcore-news.netlify.app/articles)
 
 ## Features
