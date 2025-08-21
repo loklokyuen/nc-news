@@ -1,6 +1,12 @@
 # NextCore News
 
-A web platform for reading articles, participating in discussions through comments, and engaging with content via voting. This is the frontend portion of the News and Discussion platform. The backend API repository can be found [here](https://github.com/loklokyuen/news-website-project).
+A web platform for reading articles, participating in discussions through comments, and engaging with content via voting.
+
+## Quick Links
+- **Backend Repository**: [GitHub Repo](https://github.com/loklokyuen/news-website-project) 
+- **Hosted API**: [Live Demo](https://news-and-discussion-platform.onrender.com/api)
+- **Frontend Repository(this repo)**: [GitHub Repo](https://github.com/loklokyuen/nc-news)
+- **Frontend Web App**: [Browse Articles](https://nextcore-news.netlify.app/articles)
 
 ## Features
 
@@ -10,10 +16,6 @@ A web platform for reading articles, participating in discussions through commen
 - Post and delete comments
 - Display articles by specific topics
 - RESTful endpoints with JSON responses
-
-## Usage
-
-The hosted version of this platform is available [here](https://nextcore-news.netlify.app). This frontend interacts with the [News and Discussion API](https://github.com/loklokyuen/news-website-project) to fetch articles, comments, and voting data.
 
 ## Tech Stack
 
