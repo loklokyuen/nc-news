@@ -3,10 +3,9 @@
 A web platform for reading articles, participating in discussions through comments, and engaging with content via voting.
 
 ## Quick Links
-- **Backend Repository**: [GitHub Repo](https://github.com/loklokyuen/news-website-project) 
-- **Hosted API**: [Live Demo](https://news-and-discussion-platform.onrender.com/api)
-- **Frontend Repository (this repo)**: [GitHub Repo](https://github.com/loklokyuen/nc-news)
-- **Frontend Web App**: [Browse Articles](https://nextcore-news.netlify.app/articles)
+- **Backend (API)**: [Repository](https://github.com/loklokyuen/news-website-project) • [Live Demo](https://news-and-discussion-platform.onrender.com/api)  
+- **Frontend (Web App)**: [Repository](https://github.com/loklokyuen/nc-news) • [Live Demo](https://nextcore-news.netlify.app/articles)
+
 
 ## Features
 
